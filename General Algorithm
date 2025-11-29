@@ -1,0 +1,44 @@
+Prompts the user to either start the game or quit
+  - Close the program on quit
+When the game is started, short cutscene plays with the initial story
+
+Then for the next 4 floors:
+User chooses 1 of three doors in the dungeon
+
+  If user chooses a item door:
+    Add item to Inventory Class’ abilities, weapons or consumables ArrayLists<Enum> and continue to next floor
+  
+  If user selects a combat door:
+    Prompt user to select a weapon and 3 abilities to use in the fight
+    Add the selected abilities to the curr_abilites ArrayList<Abilities> in the Inventory and set the curr_weapon to the selected Weapon object
+    Enter combat system
+
+  Combat System:
+    Start with the user’s turn, where they can either block, use their weapon, use an ability, use an item or retreat.
+      - Block will completely negate damage if player defense level is greater than enemy offense level and does half damage if enemy offense level is greater than player defense level
+      - Weapon skills will deal damage on hit with various damage types
+          If the enemy’s type weakness corresponds to the weapons damage type, the weapon will deal more damage
+          If the enemy’s strength corresponds to the weapon damage, the weapon deals less damage
+      - Using an ability will apply a status effect associated with said ability onto the enemy
+      - Using an item will heal the player for the the amount associated with the Consumable object
+      - A retreat will cause the player to lose the encounter, while still progressing to the next door
+    After user turn, enemy will perform a random skill on the player
+      - Enemy can also block with the same rules as player
+    During each turn, any status effects on the enemies will activate
+      - Bleed deals flat damage on the use of a skill
+      - Rupture deals flat damage when hit
+      - Freeze will cause the player to be unable to move next turn
+      - Paralyze will hinder the player from using combat or block skills and take bonus dmg
+      - Burn deals fixed damage at turn end
+    Exit combat if either the enemy or the player loses
+      - Although exit the game on player death
+
+  After combat, a short cutscene plays furthering the story
+
+When the player reaches the final floor:
+  User selects their items
+  A short cutscene plays introducing, the boss enemy
+  User can choose to either fight the boss, or bribe the boss with money if they have enough
+    If the user bribes the boss, the game will output another short cutscene, then end the game
+    If user chooses to fight the boss, enter combat with the enemy
+      - If player wins, play a short cutscene and end the game
