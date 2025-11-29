@@ -30,8 +30,9 @@ User chooses 1 of three doors in the dungeon
       - Freeze will cause the player to be unable to move next turn
       - Paralyze will hinder the player from using combat or block skills and take bonus dmg
       - Burn deals fixed damage at turn end
-    Exit combat if either the enemy or the player loses
-      - Although exit the game on player death
+    Exit combat if either the enemy or the player loses, although exit the game on player death
+      - If player wins, gain currency Items and defense + offense level
+      - If player loses, gain nothing
 
   After combat, a short cutscene plays furthering the story
 
