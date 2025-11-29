@@ -1,1 +1,31 @@
-// Code here
+Inventory is composed of Item Class:
+	Use a constructor to initialize variables
+    - String for the Item’s name
+    - String for the Item’s description
+
+Weapon Class Inherits Item:
+	Initialize attributes for:
+    - DamageType Enum for dmg_type
+    - double for dmg_num
+    - String for ability_desc
+
+	public void useSkill (Enemy class named target):
+		if the Weapon dmg_type equal to the target’s weakness attribute:
+      Lowers the targets health attribute by the dmg_num multiplied by 2
+		else if the dmg_type equal to target strength attribute:
+      Lowers the targets health by dmg_num * 0.65
+		else:
+      Lower target health by dmg_num
+    Cause the enemy’s health to drop by a fixed value if the RUPTURE is found in the enemy’s Debuffs list
+
+Ability Class Inherits Item:
+	Initialize status_effect attribute as StatusEffects Enum
+	
+	public void useAbility(Enemy class called target):
+		Add the status_effect to the Debuffs ArrayList<StatusEffects>
+
+Consumable Class Inherits Item:
+	Initialize the amount_healed integer 
+	
+	public void useConsumable():
+    Increase the players health attribute by the amount_healed
