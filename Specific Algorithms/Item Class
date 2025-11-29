@@ -11,12 +11,12 @@ Weapon Class Inherits Item:
 
 	public void useSkill (Enemy class named target):
 		if the Weapon dmg_type equal to the target’s weakness attribute:
-      Lowers the targets health attribute by the dmg_num multiplied by 2
+      		Lowers the targets health attribute by the dmg_num multiplied by 2
 		else if the dmg_type equal to target strength attribute:
-      Lowers the targets health by dmg_num * 0.65
+      		Lowers the targets health by dmg_num * 0.65
 		else:
-      Lower target health by dmg_num
-    Cause the enemy’s health to drop by a fixed value if the RUPTURE is found in the enemy’s Debuffs list
+      		Lower target health by dmg_num
+    	Cause the enemy’s health to drop by a fixed value if the RUPTURE is found in the enemy’s Debuffs list
 
 Ability Class Inherits Item:
 	Initialize status_effect attribute as StatusEffects Enum
