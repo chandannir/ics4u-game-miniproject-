@@ -28,4 +28,4 @@ Consumable Class Inherits Item:
 	Initialize the amount_healed integer 
 	
 	public void useConsumable():
-    Increase the players health attribute by the amount_healed
+    	Increase the players health attribute by the amount_healed
