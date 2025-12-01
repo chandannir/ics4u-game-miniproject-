@@ -1,21 +1,18 @@
 Monster is an abstract class:
 	Use a constructor to initialize variables
-Name
-Health
-Damage type 
-Damage output
-Stamina
-Defence
+	- String for Name
+	- int for Health
+	- Enum for Damage type 
+	- int for Damage output
+	- int for Offense level
+	- int for Defence level
+	- ArrayList<Enum> for debuffs
 
 	Abstract double attack()
 	Public double specialAttack()
 	Public void block()
-If attacked: do zero damage
 
-DAMAGE_TYPES is an enumeration 
-	- BLUNT
-	- SLASH
-	- MAGIC
+If attacked: do zero damage
 
 Regular Monster inherits Monster: 
 	Public double attack(damage output, damage type)	
