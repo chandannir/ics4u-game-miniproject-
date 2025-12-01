@@ -1,1 +1,25 @@
 // This is a text file so just write your stuff in here:
+Player and Inventory algorithm:
+
+Before player enters combat
+  Open players inventory
+  Make the player choose a singular weapon from their inventory
+  Make the player choose 3 abilities from their inventory
+  Player gets all of their consumables 
+  Make player confirm their choices before entering combat
+
+Player begins combat
+  Display options for actions
+  If attack is chosen
+    Player attacks will be handled by combat system
+  If player chooses skill
+    Player will be able to choose from the 3 selected abilities
+    Skills damage will be handled by combat system
+  If player chooses consumables
+    Show items in inventory
+    Allow player to select item
+    Give player option to confirm use of item
+If player chooses block
+  Combat system will handle the blocking
+If player chooses retreat
+  Calculate percentage to run by comparing player def lvl to enemies
