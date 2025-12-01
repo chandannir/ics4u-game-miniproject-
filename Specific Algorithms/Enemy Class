@@ -1,1 +1,86 @@
-// Put pseudocode here:
+Monster is an abstract class:
+	Use a constructor to initialize variables
+Name
+Health
+Damage type 
+Damage output
+Stamina
+Defence
+
+	Abstract double attack()
+	Public double specialAttack()
+	Public void block()
+If attacked: do zero damage
+
+DAMAGE_TYPES is an enumeration 
+	- BLUNT
+	- SLASH
+	- MAGIC
+
+Regular Monster inherits Monster: 
+	Public double attack(damage output, damage type)	
+Lowers targets health by dmg_output x damage_type
+Return dmg 
+
+Brute inherits Monster: 
+	Initialize:
+		- Bleed dmg
+		- Bleed chance
+	Public double attack(damage output, damage type, bleed dmg, bleed chance)	
+Lowers targets health by dmg_output x damage_type
+Inflict bleed (50%)
+Return dmg & bleed dmg
+
+IceMonster inherits Monster:
+	Initialize:
+		- Freeze chance
+	Public double attack(damage output, damage type)	
+Lowers targets health by dmg_output x damage_type
+Return dmg
+	Public double specialAttack(damage output, damage type, Freeze chance)	
+Lowers targets health by dmg_output x damage_type
+Inflict freeze (20%) for rand turns
+Return dmg & freeze turns
+	Public int freeze(Freeze chance)	
+Inflict freeze (20%) for rand turns
+Return freeze turns
+
+
+FireMonster inherits Monster:
+	Initialize:
+		- Burn chance
+		- Burn dmg
+	Public double attack(damage output, damage type)	
+Lowers targets health by dmg_output x damage_type
+Return dmg 
+	Public double specialAttack(damage output, damage type, burn chance, burn dmg)	
+Lowers targets health by dmg_output x damage_type
+Inflict burn (20%) for rand turns
+Return dmg + burn dmg
+	Public double burn(burn chance, burn dmg)
+Inflict burn (20%) for rand turns 
+Return burn dmg
+	
+
+LightningMonster Inherits Monster:
+	Initialize:
+Para chance
+	Public double attack(damage output, damage type)	
+Lowers targets health by dmg_output x damage_type
+Return dmg
+	Public double specialAttack(damage output, damage type, para chance)	
+Lowers targets health by dmg_output x damage_type
+Inflict para (20%) for rand turns
+Return dmg & para turns 
+	Public int para(Freeze chance)	
+Inflict para (20%) for rand turns
+Return para turns
+
+
+
+
+
+
+	
+	
+
