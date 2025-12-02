@@ -9,5 +9,7 @@ package com.mycompany.peachbound1;
  * @author cnir1
  */
 public enum DMG_TYPES {
-    
+    BLUNT,
+    SLASH,
+    MAGIC
 }
