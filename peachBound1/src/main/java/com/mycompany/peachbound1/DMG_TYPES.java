@@ -11,5 +11,6 @@ package com.mycompany.peachbound1;
 public enum DMG_TYPES {
     BLUNT,
     SLASH,
-    MAGIC
+    PIERCE,
+    MAGIC;
 }

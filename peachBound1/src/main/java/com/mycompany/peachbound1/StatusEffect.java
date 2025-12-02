@@ -8,6 +8,10 @@ package com.mycompany.peachbound1;
  *
  * @author clemo1
  */
-public class StatusEffect {
-    
+public enum StatusEffect {
+    BLEED,
+    RUPTURE,
+    BURN,
+    FREEZE,
+    PARALYZE;
 }

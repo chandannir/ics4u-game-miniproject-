@@ -27,10 +27,3 @@ public class Item {
         return description;
     }
 }
-
-// Weapon Subclass
-public class Weapon extends Item{
-    
-}
-
-
