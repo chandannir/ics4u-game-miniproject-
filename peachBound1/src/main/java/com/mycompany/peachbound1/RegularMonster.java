@@ -18,7 +18,7 @@ public class RegularMonster extends Monster{
     
     @Override 
     public double attack(double dmg, DMG_TYPES dmg_type, Player p){
-        double curPlayerHealth = p.gethealth() - dmg;
+        double curPlayerHealth = p.getHealth() - dmg;
         p.setHealth(curPlayerHealth);
         return curPlayerHealth;
        
