@@ -31,7 +31,7 @@ abstract class Monster {
         this.weakness = weakness;
         this.strength = strength;
         this.offense = offense;
-        ArrayList<StatusEffect> debuffs = new ArrayList<DMG_TYPES>(EnumSet.allOf(StatusEffect.class));
+        ArrayList<StatusEffect> debuffs = new ArrayList<StatusEffect>(EnumSet.allOf(StatusEffect.class));
     }
     
     public String getName(){
