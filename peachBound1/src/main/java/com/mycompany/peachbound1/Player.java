@@ -7,13 +7,17 @@ public class Player {
     private int offense_lvl;
     private int health;
 
-    private enum weakness; // Figure out which enums will be used
-    private enum strength; 
+    private DMG_TYPES weakness; // Figure out which enums will be used
+    private DMG_TYPES strength; 
     private ArrayList<Enum> debuffs; 
 
     public Player() {
 
     }
+    
+    // Add getters and setters for health
+    // - getHealth
+    // - setHealth
 
     public void openInventory() {
 

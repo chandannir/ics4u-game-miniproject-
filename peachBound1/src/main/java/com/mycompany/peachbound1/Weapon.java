@@ -25,18 +25,19 @@ public class Weapon extends Item{
         return dmgNum;
     }
     
-    /*public void useSkill(Monster target){
-        if(target is strong){
-            target.setHealth(dmgNum * 0.65);
+    public void useSkill(Monster target){
+        if(target.getStrength() == dmgType){
+            target.setHealth(target.getHealth() - dmgNum * 0.65);
         }
-        else if(){
-            target.setHealth(dmgNum * 1.5);
+        else if(target.getWeakness() == dmgType){
+            target.setHealth(target.getHealth() - dmgNum * 1.5);
         }
         else{
-            target.setHealth(dmgNum * 1.5);
+            target.setHealth(target.getHealth() - dmgNum * 1.5);
         }
     
-        rupture trigger as well
+        if(target.debuffs.contains(StatusEffect.RUPTURE)){
+            target.setHealth(target.getHealth() - 15.0);
+        }
     }
-    */
 }

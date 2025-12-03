@@ -20,8 +20,7 @@ public class Consumable extends Item{
         return healNum;
     }
     
-    /*public void useHeal(Player p){
+    public void useHeal(Player p){
         p.setHealth(p.getHealth() + healNum);
     }
-    */
 }

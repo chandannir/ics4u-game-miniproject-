@@ -20,10 +20,9 @@ public class Ability extends Item{
         return statusEffect;
     }
     
-    /*public void useAbility(Monster target){
-        if (){ // target does not have the debuff
-            // Add tp debuff array
+    public void useAbility(Monster target){
+        if (!target.debuffs.contains(statusEffect)){ // target does not have the debuff
+            target.debuffs.add(statusEffect);
         }
     }
-    */
 }

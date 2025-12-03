@@ -18,7 +18,7 @@ abstract class Monster {
     private int offense;
     private DMG_TYPES weakness;
     private DMG_TYPES strength;
-    public ArrayList<DMG_TYPES> debuffs; 
+    public ArrayList<StatusEffect> debuffs; 
     
     // Monster Constructor
     Monster(String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense){
@@ -31,7 +31,7 @@ abstract class Monster {
         this.weakness = weakness;
         this.strength = strength;
         this.offense = offense;
-        ArrayList<DMG_TYPES> debuffs = new ArrayList<DMG_TYPES>(EnumSet.allOf(DMG_TYPES.class));
+        ArrayList<StatusEffect> debuffs = new ArrayList<DMG_TYPES>(EnumSet.allOf(StatusEffect.class));
     }
     
     public String getName(){
