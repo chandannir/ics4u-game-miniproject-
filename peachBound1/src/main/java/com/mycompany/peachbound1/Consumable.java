@@ -22,5 +22,8 @@ public class Consumable extends Item{
     
     public void useHeal(Player p){
         p.setHealth(p.getHealth() + healNum);
+        if (p.getHealth() > 100){
+            p.setHealth(p.getHealth() - (p.getHealth() - 100));
+        }
     }
 }
