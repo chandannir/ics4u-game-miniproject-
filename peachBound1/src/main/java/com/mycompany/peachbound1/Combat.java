@@ -11,7 +11,7 @@ package com.mycompany.peachbound1;
 public class Combat extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Combat.class.getName());
-
+    private boolean turn = true;
     /**
      * Creates new form Combat
      */
@@ -384,6 +384,15 @@ public class Combat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Put main code for combat here such as
+    public boolean getTurn(){
+        return turn;
+    }
+    public void setTurn(boolean t){
+        turn = t;
+    }
+    
+    // Every button simply calls other methods defined in the Player class
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_smallHealUseActionPerformed
