@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.peachbound1;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,11 +13,16 @@ public class Combat extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Combat.class.getName());
     private boolean turn = true;
+    private ArrayList<Monster> targets;
+    private Monster currTarget;
+    private int currTargetNum = 0;
     /**
      * Creates new form Combat
      */
     public Combat() {
         initComponents();
+        
+        // Add all the enemies
     }
 
     /**
@@ -390,6 +396,18 @@ public class Combat extends javax.swing.JFrame {
     }
     public void setTurn(boolean t){
         turn = t;
+    }
+    
+    public void SwitchTarget(){
+        if(currTargetNum == targets.size()){
+            EndScreen winWindow = new EndScreen();
+            winWindow.setVisible(true);
+            this.setVisible(false);
+        }
+        else{
+            currTargetNum++;
+            currTarget = targets.get(currTargetNum);
+        }
     }
     
     // Every button simply calls other methods defined in the Player class
