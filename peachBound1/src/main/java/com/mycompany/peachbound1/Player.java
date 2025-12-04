@@ -12,6 +12,7 @@ public class Player {
     private DMG_TYPES weakness;
     private DMG_TYPES strength;
     private ArrayList<StatusEffect> debuffs;
+    private boolean block;
 
     // For beta test
     public Player() {
@@ -56,12 +57,18 @@ public class Player {
         inventory = newInv;
     }
 
-    // Shouldnt this be handled bu the gui?
-    public void openInventory() {
-
+    public void setBlock() {
+        block = true;
     }
 
-    //
+    public boolean getBlock() {
+        return block;
+    }
+
+    public Weapon getCurWeapon() {
+        return this.inventory.getCurrWeapon();
+    }
+
     public void attack(Monster target) {
         for (StatusEffect s : debuffs) {
             if (s == StatusEffect.FREEZE) {
@@ -87,6 +94,7 @@ public class Player {
             } else if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
                     // call the ending screen here
+                    // new end screen
                 }
                 this.health -= 12.0;
             } else if (s == StatusEffect.BURN) {
@@ -108,14 +116,26 @@ public class Player {
     }
 
     // Make sure to add status effect interaction
-    public void block() {
+    public boolean block(Monster mons) {
+        block = true;
+
         if (debuffs.contains(StatusEffect.FREEZE)) {
             // Print message in text box that says frozen?
+            block = false
             return;
         }
-        // Figure our which combat system function to call
+
+        // if monster attack_lvl > defense_lvl half damaga
+        if(mons.getOffense() > defense_lvl) {
+            this.setHealth(this.getHealth() - (mons.getDmg() / 2.0));
+            return false;
+        }
+        // if defese_lvl >= monster_attack block all
+
+        return true;
     }
 
+    // TODO:
     public void retreat() {
         if (debuffs.contains(StatusEffect.FREEZE)) {
             // Print message in text box that says frozen?

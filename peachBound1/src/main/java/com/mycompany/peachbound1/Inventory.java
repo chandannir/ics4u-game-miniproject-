@@ -25,7 +25,12 @@ public class Inventory {
         weapons.add(new Weapon("Smashing Hammer", "A giant heavy hammer that destroys everything", DMG_TYPES.BLUNT, 32));
         weapons.add(new Weapon("Piercing spear", "A spear that is really good a poking things", DMG_TYPES.PIERCE, 20));
 
+        curr_weapon = new Weapon("Boring Sword", "A normal blade with not much going on", DMG_TYPES.SLASH, 12);
+
         abilities = new ArrayList<>();
+        // String name, String desc, StatusEffect debuff)
+        abilities.add(new Ability("Freeze", ));
+
         consumables = new ArrayList<>();
     }
 
@@ -34,18 +39,18 @@ public class Inventory {
     }
 
     public void setCurrWeapon(Weapon weapon) {
+        this.curr_weapon = weapon;
+    }
+
+    public getSmallConsumable search() {
 
     }
 
-    public void selectConsumable() {
+    public getMediumConsumable search() {
 
     }
 
-    public void selectWeapon() {
-
-    }
-
-    public void selectAbility() {
+    public getBigConsumable search() {
 
     }
 }
