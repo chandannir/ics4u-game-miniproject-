@@ -84,7 +84,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" pref="33" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="weaponUse" min="-2" max="-2" attributes="0"/>
@@ -166,6 +166,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Use"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skill1UseActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="skill1Desc">
               <Properties>
@@ -235,6 +238,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Use"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skill2UseActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="skill2Desc">
               <Properties>
@@ -304,6 +310,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Use"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="skill3UseActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="skill3Desc">
               <Properties>
@@ -325,6 +334,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Use Weapon"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="weaponUseActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="smallHealUse">
           <Properties>

@@ -13,6 +13,7 @@ public class Combat extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Combat.class.getName());
     private boolean turn = true;
+    public Player player;
     private ArrayList<Monster> targets;
     private Monster currTarget;
     private int currTargetNum = 0;
@@ -21,7 +22,6 @@ public class Combat extends javax.swing.JFrame {
      */
     public Combat() {
         initComponents();
-        
         // Add all the enemies
     }
 
@@ -76,6 +76,7 @@ public class Combat extends javax.swing.JFrame {
         skill1Name.setText("Skill1 Name");
 
         skill1Use.setText("Use");
+        skill1Use.addActionListener(this::skill1UseActionPerformed);
 
         skill1Desc.setForeground(new java.awt.Color(255, 255, 255));
         skill1Desc.setText("Description:");
@@ -116,6 +117,7 @@ public class Combat extends javax.swing.JFrame {
         skill2Name.setText("Skill2 Name");
 
         skill2Use.setText("Use");
+        skill2Use.addActionListener(this::skill2UseActionPerformed);
 
         skill2Desc.setForeground(new java.awt.Color(255, 255, 255));
         skill2Desc.setText("Description:");
@@ -156,6 +158,7 @@ public class Combat extends javax.swing.JFrame {
         skill3Name.setText("Skill Name");
 
         skill3Use.setText("Use");
+        skill3Use.addActionListener(this::skill3UseActionPerformed);
 
         skill3Desc.setForeground(new java.awt.Color(255, 255, 255));
         skill3Desc.setText("Description:");
@@ -193,6 +196,7 @@ public class Combat extends javax.swing.JFrame {
         weaponUse.setBackground(new java.awt.Color(51, 51, 51));
         weaponUse.setForeground(new java.awt.Color(255, 255, 255));
         weaponUse.setText("Use Weapon");
+        weaponUse.addActionListener(this::weaponUseActionPerformed);
 
         smallHealUse.setBackground(new java.awt.Color(51, 51, 51));
         smallHealUse.setForeground(new java.awt.Color(255, 255, 255));
@@ -351,7 +355,7 @@ public class Combat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(weaponUse)
@@ -390,14 +394,38 @@ public class Combat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Put main code for combat here such as
-    public boolean getTurn(){
-        return turn;
-    }
-    public void setTurn(boolean t){
-        turn = t;
-    }
-    
+    private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
+        player.useSkill();
+    }//GEN-LAST:event_skill1UseActionPerformed
+
+    private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
+        player.useSkill();
+    }//GEN-LAST:event_skill2UseActionPerformed
+
+    private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
+        player.useSkill();
+    }//GEN-LAST:event_skill3UseActionPerformed
+
+    private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
+        player.attack(currTarget);
+    }//GEN-LAST:event_weaponUseActionPerformed
+
+    private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
+        player.block();
+    }//GEN-LAST:event_blockUseActionPerformed
+
+    private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
+        player.useConsumable();
+    }//GEN-LAST:event_smallHealUseActionPerformed
+
+    private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
+        player.useConsumable();
+    }//GEN-LAST:event_medHealUseActionPerformed
+
+    private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
+        player.useConsumable();
+    }//GEN-LAST:event_largeHealUseActionPerformed
+
     public void SwitchTarget(){
         if(currTargetNum == targets.size()){
             EndScreen winWindow = new EndScreen();
@@ -410,23 +438,6 @@ public class Combat extends javax.swing.JFrame {
         }
     }
     
-    // Every button simply calls other methods defined in the Player class
-    private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_smallHealUseActionPerformed
-
-    private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_medHealUseActionPerformed
-
-    private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_blockUseActionPerformed
-
-    private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_largeHealUseActionPerformed
-
     /**
      * @param args the command line arguments
      */
