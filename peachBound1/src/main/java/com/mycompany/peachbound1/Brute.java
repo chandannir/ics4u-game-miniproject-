@@ -1,16 +1,16 @@
 package com.mycompany.peachbound1;
+import java.util.Random;
 
-// author @cnir1
 public class Brute extends Monster{
 
     private final StatusEffect debuff; 
-    private int bleedChance;
+    private double bleedChance;
     private int bleedDmg;
 
     
     Brute(int bleedChance, int bleedDmg, StatusEffect debuff){
-        super("BRUTE Alfred", 100.0, DMG_TYPES.SLASH, 25, 50, 50, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,50);
-        this.bleedChance = 50;
+        super("BRUTE Alfred", 150, DMG_TYPES.SLASH, 35, 50, 100, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,100);
+        this.bleedChance = 0.5;
         this.bleedDmg = 5;
         this.debuff = StatusEffect.BLEED;
         
@@ -18,7 +18,7 @@ public class Brute extends Monster{
         // String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense
     }
 
-    public int getBleedChance(){
+    public double getBleedChance(){
         return bleedChance;
     }
     public int getBleedDmg(){
@@ -48,27 +48,39 @@ public class Brute extends Monster{
 
     @Override
     double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p) {
-        if(str == p.getWeakness()){
-            dmg = dmg + dmg*0.5;
-        }
-        // if strength is player weakness + 50% dmg 
-        double curPlayerHealth = p.getHealth() - dmg;
-
-        // take player current health substract from damage
-        p.setHealth(curPlayerHealth);
+       
         if(stamina >=25){
+            if(str == p.getWeakness()){
+                dmg = dmg + dmg*0.5;
+            }
+            // if strength is player weakness + 50% dmg 
+            double curPlayerHealth = p.getHealth() - dmg;
+    
+            // take player current health substract from damage
+            p.setHealth(curPlayerHealth);
+
             bleed(bleedDmg, bleedChance, p);
-            stamina -= 10;
+            setStamina(stamina-10);
+            return curPlayerHealth;
         }
-        return curPlayerHealth;
+        setStamina(stamina+10);
+        return p.getHealth();
+        
+        
     }
 
-    boolean bleed(int bleedDmg, int bleedChance, Player p){
+    //inflict bleed
+    boolean bleed(int bleedDmg, double bleedChance, Player p){
+        Random random = new Random();
         if (p.getDebuffs().contains(debuff)){
             return false;
         }
-        p.getDebuffs().add(debuff);
-        return true;
+        // block excutes 50% of the time
+        if(random.nextDouble()< bleedChance){
+            p.getDebuffs().add(debuff);
+            return true;
+        }
+        return false; 
     }
 
     
