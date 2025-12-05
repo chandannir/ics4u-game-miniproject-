@@ -1,0 +1,76 @@
+package com.mycompany.peachbound1;
+
+import java.util.Random;
+
+public class IceMonster extends Monster{
+
+    private final StatusEffect debuff; 
+    private double freezeChance;
+
+    
+
+    public IceMonster() {
+        super("ICE ALFRED", 100.0, DMG_TYPES.MAGIC, 30, 50, 50, DMG_TYPES.BLUNT, DMG_TYPES.MAGIC, 60);
+        this.debuff = null;
+        this.freezeChance = 0.3;
+        // String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense
+    }
+
+    public double getFreezeChance(){
+        return freezeChance;
+    }
+    
+    public int setFreezeChance(int freezeChance){
+        this.freezeChance = freezeChance;
+        return freezeChance;
+    }
+
+
+    @Override
+    double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p) {
+        if(str == p.getWeakness()){
+            dmg = dmg + dmg*0.5;
+        }
+        // if strength is player weakness + 50% dmg 
+        double curPlayerHealth = p.getHealth() - dmg;
+
+        // take player current health substract from damage
+        p.setHealth(curPlayerHealth);
+        return curPlayerHealth;
+        
+    }
+
+    @Override
+    double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p) {
+        if(stamina >=25){
+            if(str == p.getWeakness()){
+                dmg = dmg + dmg*0.5;
+            }
+            // if strength is player weakness + 50% dmg 
+            double curPlayerHealth = p.getHealth() - dmg;
+    
+            // take player current health substract from damage
+            p.setHealth(curPlayerHealth);
+
+            freeze(freezeChance, p);
+            setStamina(stamina-10);
+            return curPlayerHealth;
+        }
+        setStamina(stamina+10);
+        return p.getHealth();
+    }
+
+    boolean freeze(double freezeChance, Player p){
+        Random random = new Random();
+        if (p.getDebuffs().contains(debuff)){
+            return false;
+        }
+        // block excutes 30% of the time
+        if(random.nextDouble()< freezeChance){
+            p.getDebuffs().add(debuff);
+            return true;
+        }
+        return false; 
+    }
+    
+}
