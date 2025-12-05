@@ -28,6 +28,14 @@ public class Player {
     public double getHealth() {
         return health;
     }
+    
+    public DMG_TYPES getWeak(){
+        return weakness;
+    }
+    
+    public DMG_TYPES getStrength(){
+        return strength;
+    }
 
     public void setHealth(double health) {
         this.health = health;
@@ -71,19 +79,19 @@ public class Player {
 
     public void attack(Monster target) {
         for (StatusEffect s : debuffs) {
+            // make ts a switch statement
             if (s == StatusEffect.FREEZE) {
                 return;
             } else if (s == StatusEffect.PARALYZE) {
                 return;
             } else if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
-                    // new end screen
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             } else if (s == StatusEffect.BURN) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             }
@@ -100,13 +108,12 @@ public class Player {
                 return;
             } else if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
-                    // new end screen
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             } else if (s == StatusEffect.BURN) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             }
@@ -138,7 +145,10 @@ public class Player {
             return false;
         }
         // if defese_lvl >= monster_attack block all
-
+        if (mons.getOffense() <= defense_lvl) {
+            this.setHealth(this.getHealth());
+            return false;
+        }
         return true;
     }
 

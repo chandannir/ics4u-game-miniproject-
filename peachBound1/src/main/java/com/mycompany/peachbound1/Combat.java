@@ -13,16 +13,49 @@ public class Combat extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Combat.class.getName());
     private boolean turn = true;
-    private ArrayList<Monster> targets;
+    public ArrayList<Monster> targets;
     private Monster currTarget;
     private int currTargetNum = 0;
+    private Player player;
+    
     /**
      * Creates new form Combat
      */
     public Combat() {
         initComponents();
         
+        player = new Player();
+        
         // Add all the enemies
+        Monster enemy1 = new Monster("Draco", 100.0, DMG_TYPS.SLASH, 12.0, 75, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
+        Monster enemy2 = new Monster("Draco", 100.0, DMG_TYPS.SLASH, 12.0, 75, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
+        Monster enemy3 = new Monster("Draco", 100.0, DMG_TYPS.SLASH, 12.0, 75, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
+        targets.add(enemy1);
+        targets.add(enemy2);
+        targets.add(enemy3);
+        
+        currTarget = targets.get(currTargetNum);
+        
+        // Set the text to the screen
+        playerHealthVal.setText(String.valueOf(player.getHealth()));
+        dfLvl.setText(String.valueOf(player.getDefense_lvl()));
+        atkLvl.setText(String.valueOf(player.getOffense_lvl()));
+        weaknessText.setText(String.valueOf(player.getWeak()));
+        strengthText.setText(String.valueOf(player.getStrength()));
+        
+        enHealthVal.setText(String.valueOf(currTarget.getHealth()));
+        enDfLvl.setText(String.valueOf(currTarget.getDefence()));
+        enAtkLvl.setText(String.valueOf(currTarget.getOffense()));
+        enWeaknessText.setText(String.valueOf(currTarget.getWeakness()));
+        enStrengthText.setText(String.valueOf(currTarget.getStrength()));
+        enName.setText("VS " + currTarget.getName());
+        
+        skill1Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getName()));
+        skill1Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getDesc()));
+        skill2Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getName()));
+        skill2Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getDesc()));
+        skill3Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getName()));
+        skill3Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getDesc()));
     }
 
     /**
@@ -76,6 +109,7 @@ public class Combat extends javax.swing.JFrame {
         skill1Name.setText("Skill1 Name");
 
         skill1Use.setText("Use");
+        skill1Use.addActionListener(this::skill1UseActionPerformed);
 
         skill1Desc.setForeground(new java.awt.Color(255, 255, 255));
         skill1Desc.setText("Description:");
@@ -116,6 +150,7 @@ public class Combat extends javax.swing.JFrame {
         skill2Name.setText("Skill2 Name");
 
         skill2Use.setText("Use");
+        skill2Use.addActionListener(this::skill2UseActionPerformed);
 
         skill2Desc.setForeground(new java.awt.Color(255, 255, 255));
         skill2Desc.setText("Description:");
@@ -153,9 +188,10 @@ public class Combat extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
 
         skill3Name.setForeground(new java.awt.Color(255, 255, 255));
-        skill3Name.setText("Skill Name");
+        skill3Name.setText("Skill3 Name");
 
         skill3Use.setText("Use");
+        skill3Use.addActionListener(this::skill3UseActionPerformed);
 
         skill3Desc.setForeground(new java.awt.Color(255, 255, 255));
         skill3Desc.setText("Description:");
@@ -193,6 +229,7 @@ public class Combat extends javax.swing.JFrame {
         weaponUse.setBackground(new java.awt.Color(51, 51, 51));
         weaponUse.setForeground(new java.awt.Color(255, 255, 255));
         weaponUse.setText("Use Weapon");
+        weaponUse.addActionListener(this::weaponUseActionPerformed);
 
         smallHealUse.setBackground(new java.awt.Color(51, 51, 51));
         smallHealUse.setForeground(new java.awt.Color(255, 255, 255));
@@ -398,9 +435,17 @@ public class Combat extends javax.swing.JFrame {
         turn = t;
     }
     
+    public void Lose(){
+        EndScreen winWindow = new EndScreen();
+        winWindow.endText = "You have been slain...\nYou LOSE";
+        winWindow.setVisible(true);
+        this.setVisible(false);
+    }
+    
     public void SwitchTarget(){
         if(currTargetNum == targets.size()){
             EndScreen winWindow = new EndScreen();
+            winWindow.endText = "Congrats! You fought off all the enemies...\nYou WIN";
             winWindow.setVisible(true);
             this.setVisible(false);
         }
@@ -412,20 +457,36 @@ public class Combat extends javax.swing.JFrame {
     
     // Every button simply calls other methods defined in the Player class
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
-        // TODO add your handling code here:
+        player.useConsumable(player.getInventory().getSmallConsumable());
     }//GEN-LAST:event_smallHealUseActionPerformed
 
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
-        // TODO add your handling code here:
+        player.useConsumable(player.getInventory().getMediumConsumable());
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
-        // TODO add your handling code here:
+        player.block(currTarget);
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
-        // TODO add your handling code here:
+        player.useConsumable(player.getInventory().getBigConsumable());
     }//GEN-LAST:event_largeHealUseActionPerformed
+
+    private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
+        player.attack(currTarget);
+    }//GEN-LAST:event_weaponUseActionPerformed
+
+    private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
+        player.useSkill(player.getInventory().getCurrAbilities().get(0));
+    }//GEN-LAST:event_skill1UseActionPerformed
+
+    private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
+        player.useSkill(player.getInventory().getCurrAbilities().get(1));
+    }//GEN-LAST:event_skill2UseActionPerformed
+
+    private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
+        player.useSkill(player.getInventory().getCurrAbilities().get(2));
+    }//GEN-LAST:event_skill3UseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -447,7 +508,7 @@ public class Combat extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Combat().setVisible(true));
     }

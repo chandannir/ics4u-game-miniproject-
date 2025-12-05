@@ -9,7 +9,8 @@ package com.mycompany.peachbound1;
  * @author cnir1
  */
 public class PeachBound1 {
-
+    public static Combat combatScreen;
+    
     public static void main(String[] args) {
         /* Im thinking we use this to track in game global variables
         - Which floor we are on
