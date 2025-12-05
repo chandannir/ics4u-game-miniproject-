@@ -76,9 +76,16 @@ public class Player {
             } else if (s == StatusEffect.PARALYZE) {
                 return;
             } else if (s == StatusEffect.BLEED) {
-                this.health -= 12;
+                if (this.health <= 12.0) {
+                    // call the ending screen here
+                    // new end screen
+                }
+                this.health -= 12.0;
             } else if (s == StatusEffect.BURN) {
-                this.health -= 12;
+                if (this.health <= 12.0) {
+                    // call the ending screen here
+                }
+                this.health -= 12.0;
             }
         }
 
@@ -121,12 +128,12 @@ public class Player {
 
         if (debuffs.contains(StatusEffect.FREEZE)) {
             // Print message in text box that says frozen?
-            block = false
-            return;
+            block = false;
+            return false;
         }
 
         // if monster attack_lvl > defense_lvl half damaga
-        if(mons.getOffense() > defense_lvl) {
+        if (mons.getOffense() > defense_lvl) {
             this.setHealth(this.getHealth() - (mons.getDmg() / 2.0));
             return false;
         }
