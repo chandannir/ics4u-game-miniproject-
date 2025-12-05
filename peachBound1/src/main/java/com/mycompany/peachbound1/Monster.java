@@ -1,6 +1,5 @@
 package com.mycompany.peachbound1;
 import java.util.ArrayList;
-import java.util.Enumeration;
 /**
  *
  * @author cnir1
@@ -31,7 +30,7 @@ abstract class Monster {
         this.weakness = weakness;
         this.strength = strength;
         this.offense = offense;
-        ArrayList<StatusEffect> debuffs = new ArrayList<StatusEffect>(EnumSet.allOf(StatusEffect.class));
+        debuffs = new ArrayList<>();
     }
     
     public String getName(){
@@ -98,7 +97,15 @@ abstract class Monster {
         return weakness;
     }
     
-    abstract double attack(double dmg, DMG_TYPES dmg_type);
-    abstract double specialAttack(double dmg, DMG_TYPES dmg_type, int stamina);
-    abstract void block(int defenece);
+    abstract double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p);
+    abstract double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p);
+    
+    public boolean block(int defenece, Player p, Weapon w){
+        if(p.getOffense_lvl() > defenece){
+            this.setHealth(this.getHealth() - (w.getDmg() / 2.0));
+            return false;
+        }
+        return true;
+    }
+    
 }
