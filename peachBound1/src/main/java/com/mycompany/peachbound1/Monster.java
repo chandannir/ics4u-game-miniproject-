@@ -32,7 +32,9 @@ abstract class Monster {
         this.offense = offense;
         debuffs = new ArrayList<>();
     }
-    
+    public ArrayList<StatusEffect> getDebuffs(){
+        return debuffs;
+    }
     public String getName(){
         return name;
     }
@@ -99,7 +101,7 @@ abstract class Monster {
     
     abstract double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p);
     abstract double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p);
-    
+
     public boolean block(int defenece, Player p, Weapon w){
         if(p.getOffense_lvl() > defenece){
             this.setHealth(this.getHealth() - (w.getDmg() / 2.0));

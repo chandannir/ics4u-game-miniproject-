@@ -16,7 +16,7 @@ public class Combat extends javax.swing.JFrame {
     public ArrayList<Monster> targets;
     private Monster currTarget;
     private int currTargetNum = 0;
-    private Player player;
+    public Player player;
     
     /**
      * Creates new form Combat
@@ -27,9 +27,9 @@ public class Combat extends javax.swing.JFrame {
         player = new Player();
         
         // Add all the enemies
-        Monster enemy1 = new Monster("Draco", 100.0, DMG_TYPS.SLASH, 12.0, 75, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
-        Monster enemy2 = new Monster("Draco", 100.0, DMG_TYPS.SLASH, 12.0, 75, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
-        Monster enemy3 = new Monster("Draco", 100.0, DMG_TYPS.SLASH, 12.0, 75, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
+        Monster enemy1 = new Brute("Big Guy");
+        Monster enemy2 = new FireMonster("Draco");
+        Monster enemy3 = new IceMonster("Mr Freeze");
         targets.add(enemy1);
         targets.add(enemy2);
         targets.add(enemy3);
@@ -40,7 +40,7 @@ public class Combat extends javax.swing.JFrame {
         playerHealthVal.setText(String.valueOf(player.getHealth()));
         dfLvl.setText(String.valueOf(player.getDefense_lvl()));
         atkLvl.setText(String.valueOf(player.getOffense_lvl()));
-        weaknessText.setText(String.valueOf(player.getWeak()));
+        weaknessText.setText(String.valueOf(player.getWeakness()));
         strengthText.setText(String.valueOf(player.getStrength()));
         
         enHealthVal.setText(String.valueOf(currTarget.getHealth()));

@@ -8,8 +8,8 @@ public class Brute extends Monster{
     private int bleedDmg;
 
     
-    Brute(int bleedChance, int bleedDmg, StatusEffect debuff){
-        super("BRUTE Alfred", 150, DMG_TYPES.SLASH, 35, 50, 100, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,100);
+    public Brute(String name){
+        super(name, 150, DMG_TYPES.SLASH, 35, 50, 100, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,100);
         this.bleedChance = 0.5;
         this.bleedDmg = 5;
         this.debuff = StatusEffect.BLEED;

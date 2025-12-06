@@ -28,17 +28,21 @@ public class Player {
     public double getHealth() {
         return health;
     }
-    
-    public DMG_TYPES getWeak(){
-        return weakness;
+
+    public void setHealth(double health) {
+        this.health = health;
     }
     
     public DMG_TYPES getStrength(){
         return strength;
     }
-
-    public void setHealth(double health) {
-        this.health = health;
+    
+    public DMG_TYPES getWeakness(){
+        return weakness;
+    }
+    
+    public ArrayList<StatusEffect> getDebuffs(){
+        return debuffs;
     }
 
     public int getDefense_lvl() {
@@ -72,32 +76,26 @@ public class Player {
     public boolean getBlock() {
         return block;
     }
-    public ArrayList<StatusEffect> getDebuffs(){
-        return debuffs;
-    }
 
     public Weapon getCurWeapon() {
         return this.inventory.getCurrWeapon();
     }
-    public DMG_TYPES getWeakness(){
-        return weakness;
-    }
 
     public void attack(Monster target) {
         for (StatusEffect s : debuffs) {
-            // make ts a switch statement
             if (s == StatusEffect.FREEZE) {
                 return;
             } else if (s == StatusEffect.PARALYZE) {
                 return;
             } else if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
+                    // call the ending screen here
+                    // new end screen
                 }
                 this.health -= 12.0;
             } else if (s == StatusEffect.BURN) {
                 if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
+                    // call the ending screen here
                 }
                 this.health -= 12.0;
             }
@@ -114,12 +112,13 @@ public class Player {
                 return;
             } else if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
+                    // call the ending screen here
+                    // new end screen
                 }
                 this.health -= 12.0;
             } else if (s == StatusEffect.BURN) {
                 if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
+                    // call the ending screen here
                 }
                 this.health -= 12.0;
             }
@@ -151,19 +150,7 @@ public class Player {
             return false;
         }
         // if defese_lvl >= monster_attack block all
-        if (mons.getOffense() <= defense_lvl) {
-            this.setHealth(this.getHealth());
-            return false;
-        }
-        return true;
-    }
 
-    // TODO:
-    public void retreat() {
-        if (debuffs.contains(StatusEffect.FREEZE)) {
-            // Print message in text box that says frozen?
-            return;
-        }
-        // Figure out combat system function
+        return true;
     }
 }
