@@ -19,6 +19,16 @@ public class Combat extends javax.swing.JFrame {
     private int currTargetNum;
     public Player player;
     
+    // Enum for enemy move types
+    private enum EnemyMove {
+        BLOCK,
+        ATTACK,
+        SPECIAL_ATTACK
+    }
+    
+    // Queue to store enemy moves
+    private Queue<EnemyMove> enemyMoveQueue;
+    
     /**
      * Creates new form Combat
      */
@@ -37,6 +47,9 @@ public class Combat extends javax.swing.JFrame {
         targets.add(enemy3);
         
         currTarget = targets.get(currTargetNum);
+        
+        
+        enemyMoveQueue = new LinkedList<>();
         
         UpdateUI();
     }
@@ -461,37 +474,161 @@ public class Combat extends javax.swing.JFrame {
         }
     }
     
+    // Generates 5 moves for the enemy and stores them in a queue
+    private void generateEnemyMoves() {
+        // if queue already has 5 moves, stop recursion
+        if (enemyMoveQueue.size() >= 5) {
+            return;
+        }
+        
+        // randomly select a move type
+        Random random = new Random();
+        int moveChoice = random.nextInt(3); // 0 = BLOCK, 1 = ATTACK, 2 = SPECIAL_ATTACK
+        
+        EnemyMove move;
+        switch (moveChoice) {
+            case 0:
+                move = EnemyMove.BLOCK;
+                break;
+            case 1:
+                move = EnemyMove.ATTACK;
+                break;
+            case 2:
+                move = EnemyMove.SPECIAL_ATTACK;
+                break;
+            default:
+                move = EnemyMove.ATTACK; // fallback
+                break;
+        }
+        
+        // add to the queue
+        enemyMoveQueue.offer(move);
+        
+        // recursively call to fill queue until it has 5 elements
+        generateEnemyMoves();
+    }
+    
+    /**
+     * Executes one enemy move from the queue.
+     * The queue stores move types only (no effects applied during generation).
+     * When the queue is empty, generates a new set of 5 moves.
+     * Only executes one move per call - should be called after each player turn.
+     */
+    public void executeEnemyTurn() {
+        // Check if player is already defeated
+        if (player.getHealth() <= 0) {
+            Lose();
+            return;
+        }
+        
+        // Check if current monster is defeated
+        if (currTarget != null && currTarget.getHealth() <= 0) {
+            SwitchTarget();
+            // check for multiple targets
+            if (currTarget != null && currTargetNum < targets.size() && currTarget.getHealth() > 0) {
+                enemyMoveQueue.clear();
+                generateEnemyMoves();
+                executeEnemyTurn();
+            }
+            return;
+        }
+        
+        
+        if (currTarget == null) {
+            return;
+        }
+        
+        // if queue is empty, generate new moves (5 turns worth)
+        if (enemyMoveQueue.isEmpty()) {
+            generateEnemyMoves();
+        }
+        
+        // execute the next move from the queue
+        EnemyMove move = enemyMoveQueue.poll();
+        
+        if (move != null) {
+            switch (move) {
+                case BLOCK:
+                    // check if player's offense > monster's defense
+                    currTarget.block(currTarget.getDefence(), player, player.getCurWeapon());
+                    break;
+                    
+                case ATTACK:
+                    
+                    currTarget.attack(currTarget.getDmg(), currTarget.getDmgType(), 
+                                     currTarget.getStrength(), player);
+                    
+                    if (player.getHealth() <= 0) {
+                        Lose();
+                        return;
+                    }
+                    break;
+                    
+                case SPECIAL_ATTACK:
+                    
+                    currTarget.specialAttack(currTarget.getDmg(), currTarget.getDmgType(), 
+                                            currTarget.getStrength(), currTarget.getStamina(), player);
+                
+                    if (player.getHealth() <= 0) {
+                        Lose();
+                        return;
+                    }
+                    break;
+            }
+            
+            
+            UpdateUI();
+        }
+        // Only execute one move per call - no recursion
+    }
+    
     // Every button simply calls other methods defined in the Player class
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
         player.useConsumable(player.getInventory().getSmallConsumable());
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_smallHealUseActionPerformed
 
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
         player.useConsumable(player.getInventory().getMediumConsumable());
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
         player.block(currTarget);
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
         player.useConsumable(player.getInventory().getBigConsumable());
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_largeHealUseActionPerformed
 
     private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
         player.attack(currTarget);
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_weaponUseActionPerformed
 
     private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(0), currTarget);
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_skill1UseActionPerformed
 
     private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(1), currTarget);
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_skill2UseActionPerformed
 
     private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(2), currTarget);
+        // Execute enemy turn after player action
+        executeEnemyTurn();
     }//GEN-LAST:event_skill3UseActionPerformed
 
     /**
