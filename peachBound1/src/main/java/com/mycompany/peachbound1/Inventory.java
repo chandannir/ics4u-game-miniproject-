@@ -17,15 +17,15 @@ public class Inventory {
 
     // For beta testing
     public Inventory() {
-        ArrayList<Ability> curr_abilities = new ArrayList<>();
+        curr_abilities = new ArrayList<>();
         curr_abilities.add(new Ability("Freeze", "Freezes an enemy", StatusEffect.FREEZE));
         curr_abilities.add(new Ability("Burn", "Burns an enemy", StatusEffect.BURN));
         curr_abilities.add(new Ability("Paralyze", "Paralyzes an enemy", StatusEffect.PARALYZE));
 
-        ArrayList<Consumable> curr_consumables = new ArrayList<>();
-        curr_consumables.add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));
-        curr_consumables.add(new Consumable("Medium consumable", "Medium consumable heals 25 health", 25.0));
-        curr_consumables.add(new Consumable("Big consumable", "Big consumable heals 50 health", 50.0));
+        consumables = new ArrayList<>();
+        consumables.add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));
+        consumables.add(new Consumable("Medium consumable", "Medium consumable heals 25 health", 25.0));
+        consumables.add(new Consumable("Big consumable", "Big consumable heals 50 health", 50.0));
 
         weapons = new ArrayList<>();
         weapons.add(new Weapon("Boring Sword", "A normal blade with not much going on", DMG_TYPES.SLASH, 12));

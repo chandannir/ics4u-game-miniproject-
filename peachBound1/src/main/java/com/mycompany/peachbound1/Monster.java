@@ -20,7 +20,7 @@ abstract class Monster {
     public ArrayList<StatusEffect> debuffs; 
     
     // Monster Constructor
-    Monster(String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense){
+    public Monster(String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense){
         this.name = name;
         this.health = health;
         this.dmg_type = dmg_type;

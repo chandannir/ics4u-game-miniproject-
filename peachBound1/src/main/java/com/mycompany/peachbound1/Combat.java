@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.peachbound1;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -13,9 +13,10 @@ public class Combat extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Combat.class.getName());
     private boolean turn = true;
+    @SuppressWarnings("NonPublicExported")
     public ArrayList<Monster> targets;
     private Monster currTarget;
-    private int currTargetNum = 0;
+    private int currTargetNum;
     public Player player;
     
     /**
@@ -24,38 +25,7 @@ public class Combat extends javax.swing.JFrame {
     public Combat() {
         initComponents();
         
-        player = new Player();
-        
-        // Add all the enemies
-        Monster enemy1 = new Brute("Big Guy");
-        Monster enemy2 = new FireMonster("Draco");
-        Monster enemy3 = new IceMonster("Mr Freeze");
-        targets.add(enemy1);
-        targets.add(enemy2);
-        targets.add(enemy3);
-        
-        currTarget = targets.get(currTargetNum);
-        
-        // Set the text to the screen
-        playerHealthVal.setText(String.valueOf(player.getHealth()));
-        dfLvl.setText(String.valueOf(player.getDefense_lvl()));
-        atkLvl.setText(String.valueOf(player.getOffense_lvl()));
-        weaknessText.setText(String.valueOf(player.getWeakness()));
-        strengthText.setText(String.valueOf(player.getStrength()));
-        
-        enHealthVal.setText(String.valueOf(currTarget.getHealth()));
-        enDfLvl.setText(String.valueOf(currTarget.getDefence()));
-        enAtkLvl.setText(String.valueOf(currTarget.getOffense()));
-        enWeaknessText.setText(String.valueOf(currTarget.getWeakness()));
-        enStrengthText.setText(String.valueOf(currTarget.getStrength()));
-        enName.setText("VS " + currTarget.getName());
-        
-        skill1Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getName()));
-        skill1Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getDesc()));
-        skill2Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getName()));
-        skill2Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getDesc()));
-        skill3Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getName()));
-        skill3Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getDesc()));
+        UpdateUI();
     }
 
     /**
@@ -426,7 +396,44 @@ public class Combat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
+    public void UpdateUI(){
+        player = new Player();
+        targets = new ArrayList<>();
+        currTargetNum = 0;
+        
+        // Add all the enemies
+        Monster enemy1 = new Brute("Big Guy");
+        Monster enemy2 = new FireMonster("Draco");
+        Monster enemy3 = new IceMonster("Mr Freeze");
+        targets.add(enemy1);
+        targets.add(enemy2);
+        targets.add(enemy3);
+        
+        currTarget = targets.get(currTargetNum);
+        
+        // Set the text to the screen
+        playerHealthVal.setText("Health: " + String.valueOf(player.getHealth()));
+        dfLvl.setText("Deffence Level: " + String.valueOf(player.getDefense_lvl()));
+        atkLvl.setText("Offense Level: " + String.valueOf(player.getOffense_lvl()));
+        weaknessText.setText("Weakness: " + String.valueOf(player.getWeakness()));
+        strengthText.setText("Strength: " + String.valueOf(player.getStrength()));
+        
+        enHealthVal.setText("Health: " + String.valueOf(currTarget.getHealth()));
+        enDfLvl.setText("Deffence Level: " + String.valueOf(currTarget.getDefence()));
+        enAtkLvl.setText("Offense Level: " + String.valueOf(currTarget.getOffense()));
+        enWeaknessText.setText("Weakness: " + String.valueOf(currTarget.getWeakness()));
+        enStrengthText.setText("Strength: " + String.valueOf(currTarget.getStrength()));
+        enName.setText("VS " + currTarget.getName());
+        
+        skill1Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getName()));
+        skill1Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getDesc()));
+        skill2Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getName()));
+        skill2Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getDesc()));
+        skill3Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getName()));
+        skill3Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getDesc()));
+    }
+    
     // Put main code for combat here such as
     public boolean getTurn(){
         return turn;

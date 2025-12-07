@@ -106,8 +106,8 @@ public class MenuScreen extends javax.swing.JFrame {
 
     private void playBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBtnActionPerformed
         // Enter the Combat Screen
-        PeachBound1.combatScreen = new Combat();
-        PeachBound1.combatScreen.setVisible(true);
+        Combat combatScreen = new Combat();
+        combatScreen.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_playBtnActionPerformed
 
