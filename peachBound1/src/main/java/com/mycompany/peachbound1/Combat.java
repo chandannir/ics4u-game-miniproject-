@@ -508,12 +508,9 @@ public class Combat extends javax.swing.JFrame {
         generateEnemyMoves();
     }
     
-    /**
-     * Executes one enemy move from the queue.
-     * The queue stores move types only (no effects applied during generation).
-     * When the queue is empty, generates a new set of 5 moves.
-     * Only executes one move per call - should be called after each player turn.
-     */
+    // executes one enemy move from the queue
+    // calls generateEnemyMoves() if queue is empty
+    // executes enemy moves
     public void executeEnemyTurn() {
         // Check if player is already defeated
         if (player.getHealth() <= 0) {
@@ -585,49 +582,49 @@ public class Combat extends javax.swing.JFrame {
     // Every button simply calls other methods defined in the Player class
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
         player.useConsumable(player.getInventory().getSmallConsumable());
-        // Execute enemy turn after player action
+        
         executeEnemyTurn();
     }//GEN-LAST:event_smallHealUseActionPerformed
 
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
         player.useConsumable(player.getInventory().getMediumConsumable());
-        // Execute enemy turn after player action
+   
         executeEnemyTurn();
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
         player.block(currTarget);
-        // Execute enemy turn after player action
+        
         executeEnemyTurn();
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
         player.useConsumable(player.getInventory().getBigConsumable());
-        // Execute enemy turn after player action
+        
         executeEnemyTurn();
     }//GEN-LAST:event_largeHealUseActionPerformed
 
     private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
         player.attack(currTarget);
-        // Execute enemy turn after player action
+        
         executeEnemyTurn();
     }//GEN-LAST:event_weaponUseActionPerformed
 
     private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(0), currTarget);
-        // Execute enemy turn after player action
+       
         executeEnemyTurn();
     }//GEN-LAST:event_skill1UseActionPerformed
 
     private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(1), currTarget);
-        // Execute enemy turn after player action
+        
         executeEnemyTurn();
     }//GEN-LAST:event_skill2UseActionPerformed
 
     private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(2), currTarget);
-        // Execute enemy turn after player action
+        
         executeEnemyTurn();
     }//GEN-LAST:event_skill3UseActionPerformed
 
