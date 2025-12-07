@@ -24,6 +24,19 @@ public class Combat extends javax.swing.JFrame {
      */
     public Combat() {
         initComponents();
+        player = new Player();
+        targets = new ArrayList<>();
+        currTargetNum = 0;
+        
+        // Add all the enemies
+        Monster enemy1 = new Brute("Big Guy");
+        Monster enemy2 = new FireMonster("Draco");
+        Monster enemy3 = new IceMonster("Mr Freeze");
+        targets.add(enemy1);
+        targets.add(enemy2);
+        targets.add(enemy3);
+        
+        currTarget = targets.get(currTargetNum);
         
         UpdateUI();
     }
@@ -398,20 +411,6 @@ public class Combat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
  
     public void UpdateUI(){
-        player = new Player();
-        targets = new ArrayList<>();
-        currTargetNum = 0;
-        
-        // Add all the enemies
-        Monster enemy1 = new Brute("Big Guy");
-        Monster enemy2 = new FireMonster("Draco");
-        Monster enemy3 = new IceMonster("Mr Freeze");
-        targets.add(enemy1);
-        targets.add(enemy2);
-        targets.add(enemy3);
-        
-        currTarget = targets.get(currTargetNum);
-        
         // Set the text to the screen
         playerHealthVal.setText("Health: " + String.valueOf(player.getHealth()));
         dfLvl.setText("Deffence Level: " + String.valueOf(player.getDefense_lvl()));
@@ -484,15 +483,15 @@ public class Combat extends javax.swing.JFrame {
     }//GEN-LAST:event_weaponUseActionPerformed
 
     private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
-        player.useSkill(player.getInventory().getCurrAbilities().get(0));
+        player.useSkill(player.getInventory().getCurrAbilities().get(0), currTarget);
     }//GEN-LAST:event_skill1UseActionPerformed
 
     private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
-        player.useSkill(player.getInventory().getCurrAbilities().get(1));
+        player.useSkill(player.getInventory().getCurrAbilities().get(1), currTarget);
     }//GEN-LAST:event_skill2UseActionPerformed
 
     private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
-        player.useSkill(player.getInventory().getCurrAbilities().get(2));
+        player.useSkill(player.getInventory().getCurrAbilities().get(2), currTarget);
     }//GEN-LAST:event_skill3UseActionPerformed
 
     /**

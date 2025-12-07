@@ -85,72 +85,99 @@ public class Player {
         for (StatusEffect s : debuffs) {
             if (s == StatusEffect.FREEZE) {
                 return;
-            } else if (s == StatusEffect.PARALYZE) {
+            } if (s == StatusEffect.PARALYZE) {
                 return;
-            } else if (s == StatusEffect.BLEED) {
+            } if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
-                    // new end screen
-                }
-                this.health -= 12.0;
-            } else if (s == StatusEffect.BURN) {
-                if (this.health <= 12.0) {
-                    // call the ending screen here
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             }
         }
 
         this.inventory.getCurrWeapon().useSkill(target);
+        if (debuffs.contains(StatusEffect.BURN)) {
+            if (this.health <= 12.0) {
+                PeachBound1.combatScreen.Lose();
+            }
+            this.health -= 12.0;
+        }
+        
+        PeachBound1.combatScreen.UpdateUI();
     }
 
-    public void useSkill(Ability ability) {
+    public void useSkill(Ability ability, Monster target) {
         for (StatusEffect s : debuffs) {
             if (s == StatusEffect.FREEZE) {
                 return;
-            } else if (s == StatusEffect.PARALYZE) {
+            } if (s == StatusEffect.PARALYZE) {
                 return;
-            } else if (s == StatusEffect.BLEED) {
+            } if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
-                    // new end screen
-                }
-                this.health -= 12.0;
-            } else if (s == StatusEffect.BURN) {
-                if (this.health <= 12.0) {
-                    // call the ending screen here
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             }
         }
+        
+        ability.useAbility(target);
+        if (debuffs.contains(StatusEffect.BURN)) {
+            if (this.health <= 12.0) {
+                PeachBound1.combatScreen.Lose();
+            }
+            this.health -= 12.0;
+        }
+        
+        PeachBound1.combatScreen.UpdateUI();
     }
 
     public void useConsumable(Consumable consumable) {
-        if (debuffs.contains(StatusEffect.FREEZE)) {
-            // Print message in text box that says frozen?
-            return;
+        for (StatusEffect s : debuffs) {
+            if (s == StatusEffect.FREEZE) {
+                return;
+            }if (s == StatusEffect.BLEED) {
+                if (this.health <= 12.0) {
+                    PeachBound1.combatScreen.Lose();
+                }
+                this.health -= 12.0;
+            }
         }
 
         consumable.useHeal(this);
+        if (debuffs.contains(StatusEffect.BURN)) {
+            if (this.health <= 12.0) {
+                PeachBound1.combatScreen.Lose();
+            }
+            this.health -= 12.0;
+        }
+        
+        PeachBound1.combatScreen.UpdateUI();
+        
     }
 
     // Make sure to add status effect interaction
-    public boolean block(Monster mons) {
+    public void block (Monster mons) {
         block = true;
-
         if (debuffs.contains(StatusEffect.FREEZE)) {
             // Print message in text box that says frozen?
             block = false;
-            return false;
         }
-
+        
         // if monster attack_lvl > defense_lvl half damaga
-        if (mons.getOffense() > defense_lvl) {
+        if (block && mons.getOffense() > defense_lvl) {
             this.setHealth(this.getHealth() - (mons.getDmg() / 2.0));
-            return false;
         }
+        else{
+            if(!block){
+                this.setHealth(this.getHealth() - (mons.getDmg()));
+            }
+        }
+        
+        if (this.health <= 0) {
+            PeachBound1.combatScreen.Lose();
+        }
+        
         // if defese_lvl >= monster_attack block all
-
-        return true;
+        PeachBound1.combatScreen.UpdateUI();
     }
 }
