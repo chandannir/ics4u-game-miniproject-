@@ -11,12 +11,13 @@ package com.mycompany.peachbound1;
 public class EndScreen extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EndScreen.class.getName());
-
+    public String endText;
     /**
      * Creates new form EndScreen
      */
     public EndScreen() {
         initComponents();
+        endingMssg.setText(endText);
     }
 
     /**
@@ -32,7 +33,6 @@ public class EndScreen extends javax.swing.JFrame {
         winOrLose = new javax.swing.JLabel();
         endingMssg = new javax.swing.JLabel();
         quitBtn = new javax.swing.JButton();
-        restartBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,7 +40,7 @@ public class EndScreen extends javax.swing.JFrame {
 
         winOrLose.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         winOrLose.setForeground(new java.awt.Color(255, 255, 255));
-        winOrLose.setText("Win/Lose");
+        winOrLose.setText("Game End...");
 
         endingMssg.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         endingMssg.setForeground(new java.awt.Color(255, 255, 255));
@@ -48,9 +48,6 @@ public class EndScreen extends javax.swing.JFrame {
 
         quitBtn.setText("Quit");
         quitBtn.addActionListener(this::quitBtnActionPerformed);
-
-        restartBtn.setText("Restart");
-        restartBtn.addActionListener(this::restartBtnActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -60,16 +57,14 @@ public class EndScreen extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(winOrLose)
-                        .addGap(255, 255, 255))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(endingMssg, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(quitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                            .addComponent(restartBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(256, 256, 256))))
+                        .addComponent(quitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(256, 256, 256))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(winOrLose)
+                        .addGap(246, 246, 246))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,9 +73,7 @@ public class EndScreen extends javax.swing.JFrame {
                 .addComponent(winOrLose)
                 .addGap(18, 18, 18)
                 .addComponent(endingMssg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addComponent(restartBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(quitBtn)
                 .addGap(55, 55, 55))
         );
@@ -102,12 +95,8 @@ public class EndScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_quitBtnActionPerformed
-
-    private void restartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_restartBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,7 +127,6 @@ public class EndScreen extends javax.swing.JFrame {
     private javax.swing.JLabel endingMssg;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton quitBtn;
-    private javax.swing.JButton restartBtn;
     private javax.swing.JLabel winOrLose;
     // End of variables declaration//GEN-END:variables
 }

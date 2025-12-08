@@ -2,6 +2,7 @@
 package com.mycompany.peachbound1;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Player {
     private Inventory inventory;
@@ -12,6 +13,7 @@ public class Player {
     private DMG_TYPES weakness;
     private DMG_TYPES strength;
     private ArrayList<StatusEffect> debuffs;
+    private boolean block;
 
     // For beta test
     public Player() {
@@ -30,6 +32,18 @@ public class Player {
 
     public void setHealth(double health) {
         this.health = health;
+    }
+    
+    public DMG_TYPES getStrength(){
+        return strength;
+    }
+    
+    public DMG_TYPES getWeakness(){
+        return weakness;
+    }
+    
+    public ArrayList<StatusEffect> getDebuffs(){
+        return debuffs;
     }
 
     public int getDefense_lvl() {
@@ -56,71 +70,137 @@ public class Player {
         inventory = newInv;
     }
 
-    // Shouldnt this be handled bu the gui?
-    public void openInventory() {
-
+    public void setBlock() {
+        block = true;
     }
 
-    //
+    public boolean getBlock() {
+        return block;
+    }
+
+    public Weapon getCurWeapon() {
+        return this.inventory.getCurrWeapon();
+    }
+
     public void attack(Monster target) {
         for (StatusEffect s : debuffs) {
             if (s == StatusEffect.FREEZE) {
                 return;
-            } else if (s == StatusEffect.PARALYZE) {
+            } if (s == StatusEffect.PARALYZE) {
                 return;
-            } else if (s == StatusEffect.BLEED) {
-                this.health -= 12;
-            } else if (s == StatusEffect.BURN) {
-                this.health -= 12;
+            } if (s == StatusEffect.BLEED) {
+                if (this.health <= 12.0) {
+                    PeachBound1.combatScreen.Lose();
+                }
+                this.health -= 12.0;
             }
         }
 
         this.inventory.getCurrWeapon().useSkill(target);
+        if (debuffs.contains(StatusEffect.BURN)) {
+            if (this.health <= 12.0) {
+                PeachBound1.combatScreen.Lose();
+            }
+            this.health -= 12.0;
+        }
+        
+        PeachBound1.combatScreen.UpdateUI();
     }
 
-    public void useSkill(Ability ability) {
+    public void useSkill(Ability ability, Monster target) {
         for (StatusEffect s : debuffs) {
             if (s == StatusEffect.FREEZE) {
                 return;
-            } else if (s == StatusEffect.PARALYZE) {
+            } if (s == StatusEffect.PARALYZE) {
                 return;
-            } else if (s == StatusEffect.BLEED) {
+            } if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
-                    // call the ending screen here
-                }
-                this.health -= 12.0;
-            } else if (s == StatusEffect.BURN) {
-                if (this.health <= 12.0) {
-                    // call the ending screen here
+                    PeachBound1.combatScreen.Lose();
                 }
                 this.health -= 12.0;
             }
         }
+        
+        ability.useAbility(target);
+        if (debuffs.contains(StatusEffect.BURN)) {
+            if (this.health <= 12.0) {
+                PeachBound1.combatScreen.Lose();
+            }
+            this.health -= 12.0;
+        }
+        
+        PeachBound1.combatScreen.UpdateUI();
     }
 
-    public void useConsumable(Consumable consumable) {
-        if (debuffs.contains(StatusEffect.FREEZE)) {
-            // Print message in text box that says frozen?
-            return;
+    public boolean useConsumable(Consumable consumable) {
+        for (StatusEffect s : debuffs) {
+            if (s == StatusEffect.FREEZE) {
+                return true;
+            }if (s == StatusEffect.BLEED) {
+                if (this.health <= 12.0) {
+                    PeachBound1.combatScreen.Lose();
+                }
+                this.health -= 12.0;
+            }
         }
-
-        consumable.useHeal(this);
+        
+        try{
+            consumable.useHeal(this);
+        }
+        catch (NullPointerException e){
+            JOptionPane.showMessageDialog(
+            null,
+            "Item is not in inventory!",
+            "Error",
+            JOptionPane.ERROR_MESSAGE
+            );
+            
+            this.health += 12;
+            return false;
+        }
+        
+        if (debuffs.contains(StatusEffect.BURN)) {
+            if (this.health <= 12.0) {
+                PeachBound1.combatScreen.Lose();
+            }
+            this.health -= 12.0;
+        }
+        
+        PeachBound1.combatScreen.UpdateUI();
+        return true;   
     }
 
     // Make sure to add status effect interaction
-    public void block() {
+    public void block (Monster mons) {
+        block = true;
         if (debuffs.contains(StatusEffect.FREEZE)) {
             // Print message in text box that says frozen?
-            return;
+            block = false;
         }
-        // Figure our which combat system function to call
-    }
-
-    public void retreat() {
-        if (debuffs.contains(StatusEffect.FREEZE)) {
-            // Print message in text box that says frozen?
-            return;
+        
+        // if monster attack_lvl > defense_lvl half damaga
+        if (block && mons.getOffense() > defense_lvl) {
+            this.setHealth(this.getHealth() - (mons.getDmg() / 2.0));
         }
-        // Figure out combat system function
+        else{
+            if(!block){
+                this.setHealth(this.getHealth() - (mons.getDmg()));
+            }
+        }
+        
+        if (this.health <= 0) {
+            PeachBound1.combatScreen.Lose();
+        }
+        
+        if(mons.debuffs.contains(StatusEffect.BLEED)){
+            mons.setHealth(mons.getHealth() - 12);
+        }
+        
+        if(mons.debuffs.contains(StatusEffect.BURN)){
+            mons.setHealth(mons.getHealth() - 12);
+        }
+        
+        // if defese_lvl >= monster_attack block all
+        PeachBound1.combatScreen.UpdateUI();
     }
 }

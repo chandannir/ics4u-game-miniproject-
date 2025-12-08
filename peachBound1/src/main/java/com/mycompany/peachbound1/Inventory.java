@@ -17,8 +17,12 @@ public class Inventory {
 
     // For beta testing
     public Inventory() {
-        ArrayList<Ability> curr_abilities = new ArrayList<>();
-        ArrayList<Consumable> curr_consumables = new ArrayList<>();
+        curr_abilities = new ArrayList<>();
+
+        consumables = new ArrayList<>();
+        consumables.add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));
+        consumables.add(new Consumable("Medium consumable", "Medium consumable heals 25 health", 25.0));
+        consumables.add(new Consumable("Big consumable", "Big consumable heals 50 health", 50.0));
 
         weapons = new ArrayList<>();
         weapons.add(new Weapon("Boring Sword", "A normal blade with not much going on", DMG_TYPES.SLASH, 12));
@@ -26,7 +30,47 @@ public class Inventory {
         weapons.add(new Weapon("Piercing spear", "A spear that is really good a poking things", DMG_TYPES.PIERCE, 20));
 
         abilities = new ArrayList<>();
+        // String name, String desc, StatusEffect debuff)
+        abilities.add(new Ability("Freeze", "Freezes an enemy", StatusEffect.FREEZE));
+        abilities.add(new Ability("Stab", "Bleeds an enemy", StatusEffect.BLEED));
+        abilities.add(new Ability("Punch", "Ruptures enemies", StatusEffect.RUPTURE));
+
         consumables = new ArrayList<>();
+        consumables.add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));
+        consumables.add(new Consumable("Medium consumable", "Medium consumable heals 25 health", 25.0));
+        consumables.add(new Consumable("Big consumable", "Big consumable heals 50 health", 50.0));
+    }
+
+    public ArrayList<Ability> getCurrAbilities() {
+        return curr_abilities;
+    }
+
+    public void setCurrAbilities(ArrayList<Ability> curr_abilities) {
+        this.curr_abilities = curr_abilities;
+    }
+
+    public ArrayList<Consumable> getConsumables() {
+        return consumables;
+    }
+
+    public void setConsumables(ArrayList<Consumable> consumables) {
+        this.consumables = consumables;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(ArrayList<Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
+    public ArrayList<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(ArrayList<Ability> abilities) {
+        this.abilities = abilities;
     }
 
     public Weapon getCurrWeapon() {
@@ -34,18 +78,37 @@ public class Inventory {
     }
 
     public void setCurrWeapon(Weapon weapon) {
-
+        this.curr_weapon = weapon;
     }
 
-    public void selectConsumable() {
+    public Consumable getSmallConsumable() {
+        for (Consumable cons : consumables) {
+            if (cons.getName().equals("Small consumable")) {
+                return cons;
+            }
+        }
 
+        return null; // Make this an optional in the future?
     }
 
-    public void selectWeapon() {
+    public Consumable getMediumConsumable() {
+        for (Consumable cons : consumables) {
+            if (cons.getName().equals("Medium consumable")) {
+                return cons;
+            }
+        }
 
+        return null; // Make this an optional in the future?
     }
 
-    public void selectAbility() {
+    public Consumable getBigConsumable() {
+        for (Consumable cons : consumables) {
+            // Fix this search in the future
+            if (cons.getName().equals("Big consumable")) {
+                return cons;
+            }
+        }
 
+        return null; // Make this an optional in the future?
     }
 }

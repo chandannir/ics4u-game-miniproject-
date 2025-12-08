@@ -1,6 +1,5 @@
 package com.mycompany.peachbound1;
 import java.util.ArrayList;
-import java.util.Enumeration;
 /**
  *
  * @author cnir1
@@ -21,7 +20,7 @@ abstract class Monster {
     public ArrayList<StatusEffect> debuffs; 
     
     // Monster Constructor
-    Monster(String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense){
+    public Monster(String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense){
         this.name = name;
         this.health = health;
         this.dmg_type = dmg_type;
@@ -31,9 +30,11 @@ abstract class Monster {
         this.weakness = weakness;
         this.strength = strength;
         this.offense = offense;
-        ArrayList<StatusEffect> debuffs = new ArrayList<StatusEffect>(EnumSet.allOf(StatusEffect.class));
+        debuffs = new ArrayList<>();
     }
-    
+    public ArrayList<StatusEffect> getDebuffs(){
+        return debuffs;
+    }
     public String getName(){
         return name;
     }
@@ -98,7 +99,15 @@ abstract class Monster {
         return weakness;
     }
     
-    abstract double attack(double dmg, DMG_TYPES dmg_type);
-    abstract double specialAttack(double dmg, DMG_TYPES dmg_type, int stamina);
-    abstract void block(int defenece);
+    abstract double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p);
+    abstract double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p);
+
+    public boolean block(int defenece, Player p, Weapon w){
+        if(p.getOffense_lvl() > defenece){
+            this.setHealth(this.getHealth() - (w.getDmg() / 2.0));
+            return false;
+        }
+        return true;
+    }
+    
 }

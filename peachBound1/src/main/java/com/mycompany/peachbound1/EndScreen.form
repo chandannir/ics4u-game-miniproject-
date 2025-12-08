@@ -50,19 +50,16 @@
                   <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="winOrLose" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="255" pref="255" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
                           <Component id="endingMssg" min="-2" pref="591" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="quitBtn" pref="112" max="32767" attributes="0"/>
-                              <Component id="restartBtn" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="quitBtn" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="winOrLose" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -75,9 +72,7 @@
                   <Component id="winOrLose" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="endingMssg" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="110" max="32767" attributes="0"/>
-                  <Component id="restartBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="139" max="32767" attributes="0"/>
                   <Component id="quitBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
@@ -93,7 +88,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Win/Lose"/>
+            <Property name="text" type="java.lang.String" value="Game End..."/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="endingMssg">
@@ -113,14 +108,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitBtnActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="restartBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Restart"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restartBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
