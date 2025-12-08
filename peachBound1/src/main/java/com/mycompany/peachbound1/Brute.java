@@ -9,7 +9,7 @@ public class Brute extends Monster{
 
     
     public Brute(String name){
-        super(name, 150, DMG_TYPES.SLASH, 35, 50, 100, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,100);
+        super(name, 200, DMG_TYPES.SLASH, 35, 50, 10, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,10);
         this.bleedChance = 0.5;
         this.bleedDmg = 5;
         this.debuff = StatusEffect.BLEED;

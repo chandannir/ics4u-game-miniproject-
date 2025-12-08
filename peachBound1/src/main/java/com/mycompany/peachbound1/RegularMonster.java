@@ -9,7 +9,7 @@ package com.mycompany.peachbound1;
 public class RegularMonster extends Monster{
     
     public RegularMonster(String name){
-        super(name, 100.0, DMG_TYPES.SLASH, 25, 50, 50, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,50);
+        super(name, 100.0, DMG_TYPES.SLASH, 25, 50, 1, DMG_TYPES.MAGIC, DMG_TYPES.SLASH,1);
     
         // String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense
     }
