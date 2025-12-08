@@ -18,9 +18,6 @@ public class Inventory {
     // For beta testing
     public Inventory() {
         curr_abilities = new ArrayList<>();
-        curr_abilities.add(new Ability("Freeze", "Freezes an enemy", StatusEffect.FREEZE));
-        curr_abilities.add(new Ability("Burn", "Burns an enemy", StatusEffect.BURN));
-        curr_abilities.add(new Ability("Paralyze", "Paralyzes an enemy", StatusEffect.PARALYZE));
 
         consumables = new ArrayList<>();
         consumables.add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));
@@ -29,17 +26,14 @@ public class Inventory {
 
         weapons = new ArrayList<>();
         weapons.add(new Weapon("Boring Sword", "A normal blade with not much going on", DMG_TYPES.SLASH, 12));
-        weapons.add(
-                new Weapon("Smashing Hammer", "A giant heavy hammer that destroys everything", DMG_TYPES.BLUNT, 32));
+        weapons.add(new Weapon("Smashing Hammer", "A giant heavy hammer that destroys everything", DMG_TYPES.BLUNT, 32));
         weapons.add(new Weapon("Piercing spear", "A spear that is really good a poking things", DMG_TYPES.PIERCE, 20));
-
-        curr_weapon = new Weapon("Boring Sword", "A normal blade with not much going on", DMG_TYPES.SLASH, 12);
 
         abilities = new ArrayList<>();
         // String name, String desc, StatusEffect debuff)
         abilities.add(new Ability("Freeze", "Freezes an enemy", StatusEffect.FREEZE));
-        abilities.add(new Ability("Freeze", "Freezes an enemy", StatusEffect.FREEZE));
-        abilities.add(new Ability("Freeze", "Freezes an enemy", StatusEffect.FREEZE));
+        abilities.add(new Ability("Stab", "Bleeds an enemy", StatusEffect.BLEED));
+        abilities.add(new Ability("Punch", "Ruptures enemies", StatusEffect.RUPTURE));
 
         consumables = new ArrayList<>();
         consumables.add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.peachbound1;
-
+import java.util.ArrayList;
 /**
  *
  * @author Cameron
@@ -17,6 +17,21 @@ public class ItemSelection extends javax.swing.JFrame {
      */
     public ItemSelection() {
         initComponents();
+        
+        // Add Items to the Selection Boxes
+        for (Weapon weap : PeachBound1.playerChar.getInventory().getWeapons()){
+            weaponChoice.add(weap.getName());
+        }
+        
+        for (Ability ab : PeachBound1.playerChar.getInventory().getAbilities()){
+            abilityChoice1.add(ab.getName());
+        }
+        for (Ability ab2 : PeachBound1.playerChar.getInventory().getAbilities()){
+            abilityChoice2.add(ab2.getName());
+        }
+        for (Ability ab3 : PeachBound1.playerChar.getInventory().getAbilities()){
+            abilityChoice3.add(ab3.getName());
+        }
     }
 
     /**
@@ -72,6 +87,7 @@ public class ItemSelection extends javax.swing.JFrame {
         jLabel4.setText("Skill #3:");
 
         toCombatBtn.setText("Continue");
+        toCombatBtn.addActionListener(this::toCombatBtnActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,6 +157,48 @@ public class ItemSelection extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void toCombatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toCombatBtnActionPerformed
+        // Set the Inventory's current Loadout
+        Inventory i = PeachBound1.playerChar.getInventory();
+        ArrayList<Ability> abs = new ArrayList<>();
+        
+        String selectedWeap = weaponChoice.getSelectedItem();
+        String ability1 = abilityChoice1.getSelectedItem();
+        String ability2 = abilityChoice2.getSelectedItem();
+        String ability3 = abilityChoice3.getSelectedItem();
+        
+        for (Weapon weap : PeachBound1.playerChar.getInventory().getWeapons()){
+            if(weap.getName().equals(selectedWeap)){
+                i.setCurrWeapon(weap);
+                break;
+            }
+        }
+        
+        for (Ability ab : PeachBound1.playerChar.getInventory().getAbilities()){
+            if(ab.getName().equals(ability1)){
+                abs.add(ab);
+                break;
+            }
+        }
+        for (Ability ab2 : PeachBound1.playerChar.getInventory().getAbilities()){
+            if(ab2.getName().equals(ability2)){
+                abs.add(ab2);
+                break;
+            }
+        }
+        for (Ability ab3 : PeachBound1.playerChar.getInventory().getAbilities()){
+            if(ab3.getName().equals(ability3)){
+                abs.add(ab3);
+                break;
+            }
+        }
+        i.setCurrAbilities(abs);
+        
+        PeachBound1.combatScreen = new Combat();
+        PeachBound1.combatScreen.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_toCombatBtnActionPerformed
 
     /**
      * @param args the command line arguments

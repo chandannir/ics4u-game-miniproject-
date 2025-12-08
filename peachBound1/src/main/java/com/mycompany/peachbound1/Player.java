@@ -2,6 +2,7 @@
 package com.mycompany.peachbound1;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Player {
     private Inventory inventory;
@@ -131,10 +132,10 @@ public class Player {
         PeachBound1.combatScreen.UpdateUI();
     }
 
-    public void useConsumable(Consumable consumable) {
+    public boolean useConsumable(Consumable consumable) {
         for (StatusEffect s : debuffs) {
             if (s == StatusEffect.FREEZE) {
-                return;
+                return true;
             }if (s == StatusEffect.BLEED) {
                 if (this.health <= 12.0) {
                     PeachBound1.combatScreen.Lose();
@@ -142,8 +143,22 @@ public class Player {
                 this.health -= 12.0;
             }
         }
-
-        consumable.useHeal(this);
+        
+        try{
+            consumable.useHeal(this);
+        }
+        catch (NullPointerException e){
+            JOptionPane.showMessageDialog(
+            null,
+            "Item is not in inventory!",
+            "Error",
+            JOptionPane.ERROR_MESSAGE
+            );
+            
+            this.health += 12;
+            return false;
+        }
+        
         if (debuffs.contains(StatusEffect.BURN)) {
             if (this.health <= 12.0) {
                 PeachBound1.combatScreen.Lose();
@@ -152,7 +167,7 @@ public class Player {
         }
         
         PeachBound1.combatScreen.UpdateUI();
-        
+        return true;   
     }
 
     // Make sure to add status effect interaction
@@ -175,6 +190,14 @@ public class Player {
         
         if (this.health <= 0) {
             PeachBound1.combatScreen.Lose();
+        }
+        
+        if(mons.debuffs.contains(StatusEffect.BLEED)){
+            mons.setHealth(mons.getHealth() - 12);
+        }
+        
+        if(mons.debuffs.contains(StatusEffect.BURN)){
+            mons.setHealth(mons.getHealth() - 12);
         }
         
         // if defese_lvl >= monster_attack block all

@@ -34,7 +34,7 @@ public class Combat extends javax.swing.JFrame {
      */
     public Combat() {
         initComponents();
-        player = new Player();
+        player = PeachBound1.playerChar;
         targets = new ArrayList<>();
         currTargetNum = 0;
         
@@ -50,6 +50,13 @@ public class Combat extends javax.swing.JFrame {
         
         
         enemyMoveQueue = new LinkedList<>();
+        
+        skill1Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getName()));
+        skill1Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getDesc()));
+        skill2Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getName()));
+        skill2Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getDesc()));
+        skill3Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getName()));
+        skill3Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getDesc()));
         
         UpdateUI();
     }
@@ -108,25 +115,26 @@ public class Combat extends javax.swing.JFrame {
         skill1Use.addActionListener(this::skill1UseActionPerformed);
 
         skill1Desc.setForeground(new java.awt.Color(255, 255, 255));
-        skill1Desc.setText("Description:");
+        skill1Desc.setText("Description:                  ");
+        skill1Desc.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(skill1Name)
+                .addGap(37, 37, 37))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(skill1Use)
-                                .addGap(27, 27, 27))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(skill1Name)
-                                .addGap(37, 37, 37))))
-                    .addComponent(skill1Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(28, 28, 28)
+                        .addComponent(skill1Use))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(skill1Desc)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,8 +142,8 @@ public class Combat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(skill1Name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(skill1Desc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(skill1Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skill1Use)
                 .addGap(19, 19, 19))
         );
@@ -149,7 +157,8 @@ public class Combat extends javax.swing.JFrame {
         skill2Use.addActionListener(this::skill2UseActionPerformed);
 
         skill2Desc.setForeground(new java.awt.Color(255, 255, 255));
-        skill2Desc.setText("Description:");
+        skill2Desc.setText("Description:                    ");
+        skill2Desc.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -167,7 +176,7 @@ public class Combat extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(skill2Name)
                                 .addGap(37, 37, 37))))
-                    .addComponent(skill2Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(skill2Desc)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,8 +184,8 @@ public class Combat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(skill2Name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(skill2Desc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(skill2Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skill2Use)
                 .addGap(19, 19, 19))
         );
@@ -190,7 +199,8 @@ public class Combat extends javax.swing.JFrame {
         skill3Use.addActionListener(this::skill3UseActionPerformed);
 
         skill3Desc.setForeground(new java.awt.Color(255, 255, 255));
-        skill3Desc.setText("Description:");
+        skill3Desc.setText("Description:                    ");
+        skill3Desc.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -208,7 +218,7 @@ public class Combat extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                                 .addComponent(skill3Name)
                                 .addGap(37, 37, 37))))
-                    .addComponent(skill3Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(skill3Desc)))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,8 +226,8 @@ public class Combat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(skill3Name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(skill3Desc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(skill3Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skill3Use)
                 .addGap(19, 19, 19))
         );
@@ -437,13 +447,6 @@ public class Combat extends javax.swing.JFrame {
         enWeaknessText.setText("Weakness: " + String.valueOf(currTarget.getWeakness()));
         enStrengthText.setText("Strength: " + String.valueOf(currTarget.getStrength()));
         enName.setText("VS " + currTarget.getName());
-        
-        skill1Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getName()));
-        skill1Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(0).getDesc()));
-        skill2Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getName()));
-        skill2Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(1).getDesc()));
-        skill3Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getName()));
-        skill3Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getDesc()));
     }
     
     // Put main code for combat here such as
@@ -581,27 +584,25 @@ public class Combat extends javax.swing.JFrame {
     
     // Every button simply calls other methods defined in the Player class
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
-        player.useConsumable(player.getInventory().getSmallConsumable());
-        
-        executeEnemyTurn();
+        if (player.useConsumable(player.getInventory().getSmallConsumable())){
+            executeEnemyTurn();
+        }
     }//GEN-LAST:event_smallHealUseActionPerformed
 
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
-        player.useConsumable(player.getInventory().getMediumConsumable());
-   
-        executeEnemyTurn();
+        if (player.useConsumable(player.getInventory().getMediumConsumable())){
+            executeEnemyTurn();
+        }
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
         player.block(currTarget);
-        
-        executeEnemyTurn();
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
-        player.useConsumable(player.getInventory().getBigConsumable());
-        
-        executeEnemyTurn();
+        if (player.useConsumable(player.getInventory().getBigConsumable())){
+            executeEnemyTurn();
+        }
     }//GEN-LAST:event_largeHealUseActionPerformed
 
     private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
