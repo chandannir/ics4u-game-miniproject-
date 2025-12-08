@@ -40,7 +40,7 @@ public class Combat extends javax.swing.JFrame {
         currTargetNum = 0;
         
         // Add all the enemies
-        Monster enemy1 = new Brute("Big Guy");
+        Monster enemy1 = new RegularMonster("Big Guy");
         Monster enemy2 = new FireMonster("Draco");
         Monster enemy3 = new IceMonster("Mr Freeze");
         targets.add(enemy1);
@@ -395,7 +395,7 @@ public class Combat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(18, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(weaponUse)
@@ -433,7 +433,7 @@ public class Combat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
+
     public void UpdateUI(){
         // Set the text to the screen
         playerHealthVal.setText("Health: " + String.valueOf(player.getHealth()));
@@ -464,7 +464,7 @@ public class Combat extends javax.swing.JFrame {
         winWindow.setVisible(true);
         this.setVisible(false);
     }
-    
+   
     public void SwitchTarget(){
         if(currTargetNum == targets.size()){
             EndScreen winWindow = new EndScreen();
@@ -477,7 +477,7 @@ public class Combat extends javax.swing.JFrame {
             currTarget = targets.get(currTargetNum);
         }
     }
-    
+
     // Generates 5 moves for the enemy and stores them in a queue
     private void generateEnemyMoves() {
         // if queue already has 5 moves, stop recursion
@@ -607,8 +607,10 @@ public class Combat extends javax.swing.JFrame {
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
+
         player.block(currTarget);
         enemyMoveQueue.poll();
+
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
