@@ -4,6 +4,7 @@
  */
 package com.mycompany.peachbound1;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Cameron
@@ -195,9 +196,19 @@ public class ItemSelection extends javax.swing.JFrame {
         }
         i.setCurrAbilities(abs);
         
-        PeachBound1.combatScreen = new Combat();
-        PeachBound1.combatScreen.setVisible(true);
-        this.setVisible(false);
+        if(ability1.equals(ability2) || ability1.equals(ability3) || ability2.equals(ability3)){
+            JOptionPane.showMessageDialog(
+            null,
+            "Cannot use the same ability twice!",
+            "Error",
+            JOptionPane.ERROR_MESSAGE
+            );
+        }
+        else{
+            PeachBound1.combatScreen = new Combat();
+            PeachBound1.combatScreen.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_toCombatBtnActionPerformed
 
     /**
