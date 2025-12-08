@@ -18,6 +18,12 @@ public class DoorSelect extends javax.swing.JFrame {
     public DoorSelect() {
         initComponents();
     }
+    
+    private void EnterDoor(){
+        ItemSelection combatPrep = new ItemSelection();
+        combatPrep.setVisible(true);
+        this.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,15 +163,15 @@ public class DoorSelect extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void door1ChosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_door1ChosenActionPerformed
-        // TODO add your handling code here:
+        EnterDoor();
     }//GEN-LAST:event_door1ChosenActionPerformed
 
     private void door2ChosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_door2ChosenActionPerformed
-        // TODO add your handling code here:
+        EnterDoor();
     }//GEN-LAST:event_door2ChosenActionPerformed
 
     private void door3ChosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_door3ChosenActionPerformed
-        // TODO add your handling code here:
+        EnterDoor();
     }//GEN-LAST:event_door3ChosenActionPerformed
 
     /**
