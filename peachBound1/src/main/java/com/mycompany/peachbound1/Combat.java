@@ -4,6 +4,7 @@
  */
 package com.mycompany.peachbound1;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -585,47 +586,79 @@ public class Combat extends javax.swing.JFrame {
     // Every button simply calls other methods defined in the Player class
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getSmallConsumable())){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException ex) {
+                System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
             executeEnemyTurn();
         }
     }//GEN-LAST:event_smallHealUseActionPerformed
 
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getMediumConsumable())){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException ex) {
+                System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
             executeEnemyTurn();
         }
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
         player.block(currTarget);
+        enemyMoveQueue.poll();
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getBigConsumable())){
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException ex) {
+                System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
             executeEnemyTurn();
         }
     }//GEN-LAST:event_largeHealUseActionPerformed
 
     private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
         player.attack(currTarget);
-        
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException ex) {
+            System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         executeEnemyTurn();
     }//GEN-LAST:event_weaponUseActionPerformed
 
     private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(0), currTarget);
-       
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException ex) {
+            System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         executeEnemyTurn();
     }//GEN-LAST:event_skill1UseActionPerformed
 
     private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(1), currTarget);
-        
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException ex) {
+            System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         executeEnemyTurn();
     }//GEN-LAST:event_skill2UseActionPerformed
 
     private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(2), currTarget);
-        
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException ex) {
+            System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         executeEnemyTurn();
     }//GEN-LAST:event_skill3UseActionPerformed
 

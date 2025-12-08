@@ -103,9 +103,15 @@ abstract class Monster {
     abstract double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p);
 
     public boolean block(int defenece, Player p, Weapon w){
-        if(p.getOffense_lvl() > defenece){
-            this.setHealth(this.getHealth() - (w.getDmg() / 2.0));
+        if(debuffs.contains(StatusEffect.FREEZE)){
             return false;
+        }
+        
+        if(getHealth() == 200){
+            setHealth(getHealth() + 50);
+        }
+        else{
+            setHealth(getHealth() + 25);
         }
         return true;
     }
