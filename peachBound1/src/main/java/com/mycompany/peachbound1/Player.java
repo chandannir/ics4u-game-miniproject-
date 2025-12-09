@@ -81,21 +81,37 @@ public class Player {
     public Weapon getCurWeapon() {
         return this.inventory.getCurrWeapon();
     }
-
-    public void attack(Monster target) {
-        for (StatusEffect s : debuffs) {
-            if (s == StatusEffect.FREEZE) {
-                return;
-            } if (s == StatusEffect.PARALYZE) {
-                return;
-            } if (s == StatusEffect.BLEED) {
-                if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
+    
+    public boolean checkStatus(){
+        for(int i = 0; i <= debuffs.size(); i ++){
+            if(null != debuffs.get(i))switch (debuffs.get(i)) {
+                case FREEZE -> {
+                    debuffs.remove(i);
+                    return true;
                 }
-                this.health -= 12.0;
-            }
+                case PARALYZE -> {
+                    debuffs.remove(i);
+                    return true;
+                }
+                case BLEED -> {
+                    if (this.health <= 12.0) {
+                        PeachBound1.combatScreen.Lose();
+                    }   
+                    this.health -= 12.0;
+                    return false;
+                }
+                default -> {
+                    return false; 
+                }
+            }  
         }
-
+        return false;
+    }
+    public void attack(Monster target) {
+        
+        if (checkStatus()){
+            return;
+        }
         this.inventory.getCurrWeapon().useSkill(target);
         if (debuffs.contains(StatusEffect.BURN)) {
             if (this.health <= 12.0) {
@@ -105,22 +121,12 @@ public class Player {
         }
         
         PeachBound1.combatScreen.UpdateUI();
-    }
-
-    public void useSkill(Ability ability, Monster target) {
-        for (StatusEffect s : debuffs) {
-            if (s == StatusEffect.FREEZE) {
-                return;
-            } if (s == StatusEffect.PARALYZE) {
-                return;
-            } if (s == StatusEffect.BLEED) {
-                if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
-                }
-                this.health -= 12.0;
-            }
         }
-        
+    
+    public void useSkill(Ability ability, Monster target) {
+        if (checkStatus()){
+            return;
+        }    
         ability.useAbility(target);
         if (debuffs.contains(StatusEffect.BURN)) {
             if (this.health <= 12.0) {
@@ -133,15 +139,8 @@ public class Player {
     }
 
     public boolean useConsumable(Consumable consumable) {
-        for (StatusEffect s : debuffs) {
-            if (s == StatusEffect.FREEZE) {
-                return true;
-            }if (s == StatusEffect.BLEED) {
-                if (this.health <= 12.0) {
-                    PeachBound1.combatScreen.Lose();
-                }
-                this.health -= 12.0;
-            }
+        if (checkStatus()){
+            return false; 
         }
         
         try{
