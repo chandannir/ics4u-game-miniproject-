@@ -19,8 +19,11 @@ public class LightningMonster extends Monster{
 
     @Override
     double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p) {
+        if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
+           dmg = dmg + dmg*0.6;
+        }        
         if(str == p.getWeakness()){
-            dmg = dmg + dmg*0.5;
+            dmg = dmg + dmg*0.3;
         }
         // if strength is player weakness + 50% dmg 
         double curPlayerHealth = p.getHealth() - dmg;
@@ -34,8 +37,11 @@ public class LightningMonster extends Monster{
     @Override
     double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p) {
         if(stamina >=25){
+            if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
+                dmg = dmg + dmg*0.6;
+            }
             if(str == p.getWeakness()){
-                dmg = dmg + dmg*0.5;
+                dmg = dmg + dmg*0.3;
             }
             // if strength is player weakness + 50% dmg 
             double curPlayerHealth = p.getHealth() - dmg;

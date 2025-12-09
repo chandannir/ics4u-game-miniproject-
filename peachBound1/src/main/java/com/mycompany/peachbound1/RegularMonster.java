@@ -22,8 +22,11 @@ public class RegularMonster extends Monster{
         else if(debuffs.contains(StatusEffect.PARALYZE)){
             return p.getHealth();
         }
+        if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
+           dmg = dmg + dmg*0.6;
+        }
         if(str == p.getWeakness()){
-            dmg = dmg + dmg*0.5;
+            dmg = dmg + dmg*0.2;
         }
         // if strength is player weakness + 50% dmg 
         double curPlayerHealth = p.getHealth() - dmg;

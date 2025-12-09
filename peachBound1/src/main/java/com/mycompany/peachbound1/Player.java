@@ -83,7 +83,11 @@ public class Player {
     }
     
     public boolean checkStatus(){
-        for(int i = 0; i <= debuffs.size(); i ++){
+        if(debuffs.isEmpty()){
+            return false;
+        }
+        
+        for(int i = 0; i <= debuffs.size(); i++){
             if(null != debuffs.get(i))switch (debuffs.get(i)) {
                 case FREEZE -> {
                     debuffs.remove(i);

@@ -659,7 +659,7 @@ public class Combat extends javax.swing.JFrame {
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getSmallConsumable())){
             try {
-                TimeUnit.MILLISECONDS.sleep(20);
+                TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException ex) {
                 System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -670,7 +670,7 @@ public class Combat extends javax.swing.JFrame {
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getMediumConsumable())){
             try {
-                TimeUnit.MILLISECONDS.sleep(20);
+                TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException ex) {
                 System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -688,7 +688,7 @@ public class Combat extends javax.swing.JFrame {
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getBigConsumable())){
             try {
-                TimeUnit.MILLISECONDS.sleep(20);
+                TimeUnit.MILLISECONDS.sleep(200);
             } catch (InterruptedException ex) {
                 System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -699,7 +699,7 @@ public class Combat extends javax.swing.JFrame {
     private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
         player.attack(currTarget);
         try {
-            TimeUnit.MILLISECONDS.sleep(20);
+            TimeUnit.MILLISECONDS.sleep(200);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -709,7 +709,7 @@ public class Combat extends javax.swing.JFrame {
     private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(0), currTarget);
         try {
-            TimeUnit.MILLISECONDS.sleep(20);
+            TimeUnit.MILLISECONDS.sleep(200);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -719,7 +719,7 @@ public class Combat extends javax.swing.JFrame {
     private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(1), currTarget);
         try {
-            TimeUnit.MILLISECONDS.sleep(20);
+            TimeUnit.MILLISECONDS.sleep(200);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -729,7 +729,7 @@ public class Combat extends javax.swing.JFrame {
     private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(2), currTarget);
         try {
-           TimeUnit.MILLISECONDS.sleep(20);
+           TimeUnit.MILLISECONDS.sleep(200);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
