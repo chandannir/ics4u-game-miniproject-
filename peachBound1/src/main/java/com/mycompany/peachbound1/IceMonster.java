@@ -62,9 +62,6 @@ public class IceMonster extends Monster{
 
     boolean freeze(double freezeChance, Player p){
         Random random = new Random();
-        if (p.getDebuffs().contains(debuff)){
-            return false;
-        }
         // block excutes 30% of the time
         if(random.nextDouble()< freezeChance){
             p.getDebuffs().add(debuff);

@@ -4,6 +4,8 @@
  */
 package com.mycompany.peachbound1;
 
+import java.util.Random;
+
 /**
  *
  * @author Cameron
@@ -20,9 +22,29 @@ public class DoorSelect extends javax.swing.JFrame {
     }
     
     private void EnterDoor(){
-        ItemSelection combatPrep = new ItemSelection();
-        combatPrep.setVisible(true);
-        this.setVisible(false);
+        Random random = new Random();
+        int door = random.nextInt(2);
+        
+        switch(door){
+                case 0:
+                    // Combat Door
+                    ItemSelection combatPrep = new ItemSelection();
+                    combatPrep.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                case 1:
+                    // Item Door
+                    ItemGain gainDoor = new ItemGain();
+                    gainDoor.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                default:
+                    // Combat Door
+                    combatPrep = new ItemSelection();
+                    combatPrep.setVisible(true);
+                    this.setVisible(false);
+                    break;
+        }
     }
 
     /**

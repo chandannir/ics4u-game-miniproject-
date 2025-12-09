@@ -53,9 +53,6 @@ public class LightningMonster extends Monster{
 
     boolean para(double paraChance, Player p){
         Random random = new Random();
-        if (p.getDebuffs().contains(debuff)){
-            return false;
-        }
         // block excutes 30% of the time
         if(random.nextDouble()< paraChance){
             p.getDebuffs().add(debuff);

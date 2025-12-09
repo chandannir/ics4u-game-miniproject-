@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.peachbound1;
-
+import java.util.Random;
 /**
  *
  * @author Cameron
@@ -17,6 +17,75 @@ public class ItemGain extends javax.swing.JFrame {
      */
     public ItemGain() {
         initComponents();
+        
+        GainWeapon();
+        GainOther();
+    }
+    
+    private void ItemGain(Random rand, int seed){
+        seed = rand.nextInt(3);
+                switch(seed){
+                    case 0:
+                        // Small
+                        PeachBound1.playerChar.getInventory().getConsumables().add(new Consumable("Small consumable", "Small consumable heals 15 health", 15.0));
+                        abName.setText("Item Gained: Small Consumable (+15 hp)");
+                        break;
+                    case 1:
+                        // Medium
+                        PeachBound1.playerChar.getInventory().getConsumables().add(new Consumable("Medium consumable", "Medium consumable heals 25 health", 25.0));
+                        abName.setText("Item Gained: Med Consumable (+25 hp)");
+                        break;
+                    case 2:
+                        // Big
+                        PeachBound1.playerChar.getInventory().getConsumables().add(new Consumable("Big consumable", "Big consumable heals 50 health", 50.0));
+                        abName.setText("Item Gained: Big Consumable (+50 hp)");
+                        break;
+                    default:
+                        PeachBound1.playerChar.getInventory().getConsumables().add(new Consumable("Big consumable", "Big consumable heals 50 health", 50.0));
+                        abName.setText("Item Gained: Big Consumable (+50 hp)");
+                        break;
+                }
+    }
+    
+    private void GainWeapon(){
+        Random rand = new Random();
+        int seed = rand.nextInt(PeachBound1.possibleWeapons.size());
+        
+        if(PeachBound1.playerChar.getInventory().getWeapons().contains(PeachBound1.possibleWeapons.get(seed))){
+            GainWeapon();
+        }
+        else{
+            PeachBound1.playerChar.getInventory().getWeapons().add(PeachBound1.possibleWeapons.get(seed));
+            weapName.setText("Weapon Gained: " + PeachBound1.possibleWeapons.get(seed).getName());
+        }
+    }
+    
+    private void GainOther(){
+        Random rand = new Random();
+        int seed = rand.nextInt(2);
+        
+        switch(seed){
+            case 0:
+                // Gain Item
+                ItemGain(rand, seed);
+            case 1:
+                // Gain Ability
+                seed = rand.nextInt(PeachBound1.possibleItems.size());
+        
+                if(PeachBound1.playerChar.getInventory().getAbilities().contains(PeachBound1.possibleItems.get(seed))){
+                    seed = rand.nextInt(3);
+                    ItemGain(rand, seed);
+                }
+                else{
+                    PeachBound1.playerChar.getInventory().getAbilities().add(PeachBound1.possibleItems.get(seed));
+                    abName.setText("Ability Gained: " + PeachBound1.possibleItems.get(seed).getName());
+                }
+                break;
+            default:
+                // Gain Item
+                ItemGain(rand, seed);
+                break;
+        }
     }
 
     /**
@@ -29,42 +98,50 @@ public class ItemGain extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        itemName = new javax.swing.JLabel();
+        weapName = new javax.swing.JLabel();
         continueBtn = new javax.swing.JButton();
+        abName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        itemName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        itemName.setForeground(new java.awt.Color(255, 255, 255));
-        itemName.setText("You Gained: Item Name!");
+        weapName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        weapName.setForeground(new java.awt.Color(255, 255, 255));
+        weapName.setText("You Gained: Weapon");
 
         continueBtn.setText("Continue");
         continueBtn.addActionListener(this::continueBtnActionPerformed);
+
+        abName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        abName.setForeground(new java.awt.Color(255, 255, 255));
+        abName.setText("You Gained: Item or Ability");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(174, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(itemName)
-                        .addGap(153, 153, 153))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(continueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(231, 231, 231))))
+                    .addComponent(weapName)
+                    .addComponent(abName))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(249, Short.MAX_VALUE)
+                .addComponent(continueBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(238, 238, 238))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(itemName)
-                .addGap(36, 36, 36)
+                .addGap(25, 25, 25)
+                .addComponent(weapName)
+                .addGap(25, 25, 25)
+                .addComponent(abName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(continueBtn)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -75,14 +152,18 @@ public class ItemGain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
-        // TODO add your handling code here:
+        ItemSelection combatPrep = new ItemSelection();
+        combatPrep.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_continueBtnActionPerformed
 
     /**
@@ -111,8 +192,9 @@ public class ItemGain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel abName;
     private javax.swing.JButton continueBtn;
-    private javax.swing.JLabel itemName;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel weapName;
     // End of variables declaration//GEN-END:variables
 }

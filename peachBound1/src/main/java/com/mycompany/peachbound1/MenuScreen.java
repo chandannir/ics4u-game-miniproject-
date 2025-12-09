@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.peachbound1;
-
+import java.util.ArrayList;
 /**
  *
  * @author Cameron
@@ -106,6 +106,20 @@ public class MenuScreen extends javax.swing.JFrame {
 
     private void playBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBtnActionPerformed
         // Enter the Combat Screen
+        
+        // Initialize possibilities
+        PeachBound1.possibleWeapons = new ArrayList<>();
+        PeachBound1.possibleWeapons.add(new Weapon("Mario Kart", "Ram into everybody!", DMG_TYPES.BLUNT, 30));
+        PeachBound1.possibleWeapons.add(new Weapon("Fire Flower", "Burn them without applying burn, if that makes sense...", DMG_TYPES.MAGIC, 22));
+        PeachBound1.possibleWeapons.add(new Weapon("Bowsers Shell", "Who knew turtle shells were sharp!", DMG_TYPES.PIERCE, 27));
+        PeachBound1.possibleWeapons.add(new Weapon("Mario's Shoes", "Step on em like a goomba!", DMG_TYPES.BLUNT, 20));
+        PeachBound1.possibleWeapons.add(new Weapon("Great Sword", "Sword but bigger", DMG_TYPES.SLASH, 25));
+        
+        PeachBound1.possibleItems = new ArrayList<>();
+        PeachBound1.possibleItems.add(new Ability("Zap", "Paralyze them!", StatusEffect.PARALYZE));
+        PeachBound1.possibleItems.add(new Ability("Fire Ball", "Burn enemies!", StatusEffect.BURN));
+        
+        
         PeachBound1.playerChar = new Player();
         DoorSelect doorScreen = new DoorSelect();
         doorScreen.setVisible(true);

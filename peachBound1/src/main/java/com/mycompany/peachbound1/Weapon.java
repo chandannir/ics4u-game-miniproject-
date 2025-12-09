@@ -27,7 +27,7 @@ public class Weapon extends Item{
     
     public void useSkill(Monster target){
         // Check for paralyze to perform double dmg effect
-        double dmgDeal = dmgNum;
+        double dmgDeal = dmgNum + (PeachBound1.playerChar.getOffense_lvl() * 2.5);
         
         if(target.debuffs.contains(StatusEffect.PARALYZE)){
             dmgDeal *= 1.7;

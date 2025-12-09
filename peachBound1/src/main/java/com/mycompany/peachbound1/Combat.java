@@ -59,6 +59,8 @@ public class Combat extends javax.swing.JFrame {
         skill3Name.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getName()));
         skill3Desc.setText(String.valueOf(player.getInventory().getCurrAbilities().get(2).getDesc()));
         
+        generateEnemyMoves();
+        
         UpdateUI();
     }
 
@@ -102,6 +104,10 @@ public class Combat extends javax.swing.JFrame {
         enWeaknessText = new javax.swing.JLabel();
         enStrengthText = new javax.swing.JLabel();
         enName = new javax.swing.JLabel();
+        enMoves = new javax.swing.JLabel();
+        enDebuffTxt = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        debuffText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,7 +233,7 @@ public class Combat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(skill3Name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(skill3Desc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(skill3Desc, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skill3Use)
                 .addGap(19, 19, 19))
@@ -326,6 +332,12 @@ public class Combat extends javax.swing.JFrame {
         enName.setForeground(new java.awt.Color(255, 255, 255));
         enName.setText("VS Enemy Name");
 
+        enMoves.setForeground(new java.awt.Color(255, 255, 255));
+        enMoves.setText("Upcoming Moves: ");
+
+        enDebuffTxt.setForeground(new java.awt.Color(255, 255, 255));
+        enDebuffTxt.setText("Enemy Debuffs:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -333,23 +345,33 @@ public class Combat extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enHealthVal)
-                    .addComponent(enDfLvl)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(enAtkLvl)
                         .addGap(222, 222, 222)
                         .addComponent(enName))
                     .addComponent(enWeaknessText)
-                    .addComponent(enStrengthText))
+                    .addComponent(enStrengthText)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enHealthVal)
+                            .addComponent(enDfLvl))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enDebuffTxt)
+                            .addComponent(enMoves))))
                 .addContainerGap(260, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(enHealthVal)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enHealthVal)
+                    .addComponent(enMoves))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(enDfLvl)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enDfLvl)
+                    .addComponent(enDebuffTxt))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -364,6 +386,28 @@ public class Combat extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        jPanel7.setBackground(new java.awt.Color(51, 51, 51));
+
+        debuffText.setForeground(new java.awt.Color(255, 255, 255));
+        debuffText.setText("Debuffs:");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(debuffText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(debuffText)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -375,18 +419,24 @@ public class Combat extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(weaponUse, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(smallHealUse, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(medHealUse, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(blockUse, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(largeHealUse, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(weaponUse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(smallHealUse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(blockUse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(medHealUse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(largeHealUse, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(28, 28, 28)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(19, 19, 19))))
@@ -395,23 +445,28 @@ public class Combat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 33, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(weaponUse)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(blockUse)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                            .addComponent(smallHealUse)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(medHealUse)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(largeHealUse))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(weaponUse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(blockUse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(smallHealUse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(medHealUse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(largeHealUse))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -427,7 +482,7 @@ public class Combat extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -448,6 +503,10 @@ public class Combat extends javax.swing.JFrame {
         enWeaknessText.setText("Weakness: " + String.valueOf(currTarget.getWeakness()));
         enStrengthText.setText("Strength: " + String.valueOf(currTarget.getStrength()));
         enName.setText("VS " + currTarget.getName());
+        
+        debuffText.setText("Debuffs: " + String.valueOf(player.getDebuffs()));
+        enDebuffTxt.setText("Enemy Debuffs: " + String.valueOf(currTarget.debuffs));
+        enMoves.setText("Upcoming Moves: " + String.valueOf(enemyMoveQueue));
     }
     
     // Put main code for combat here such as
@@ -460,7 +519,8 @@ public class Combat extends javax.swing.JFrame {
     
     public void Lose(){
         EndScreen winWindow = new EndScreen();
-        winWindow.endText = "You have been slain...\nYou LOSE";
+        winWindow.endText = "You have been slain... You LOSE";
+        winWindow.EndMssg();
         winWindow.setVisible(true);
         this.setVisible(false);
     }
@@ -468,7 +528,8 @@ public class Combat extends javax.swing.JFrame {
     public void SwitchTarget(){
         if(currTargetNum == targets.size()){
             EndScreen winWindow = new EndScreen();
-            winWindow.endText = "Congrats! You fought off all the enemies...\nYou WIN";
+            winWindow.endText = "Congrats! You fought off all the enemies... You WIN";
+            winWindow.EndMssg();
             winWindow.setVisible(true);
             this.setVisible(false);
         }
@@ -476,6 +537,17 @@ public class Combat extends javax.swing.JFrame {
             currTargetNum++;
             currTarget = targets.get(currTargetNum);
         }
+    }
+    
+    private void CheckFreeze(){
+        // Check if player has freeze
+        // If it does proc an error window and remove freeze
+    }
+    
+    private void CheckPara(){
+        // Check if player has para
+        // If it does proc an error window and remove para
+        // Also make it so player takes 1.6x dmg if para (add it to the enemy move logic)
     }
 
     // Generates 5 moves for the enemy and stores them in a queue
@@ -587,7 +659,7 @@ public class Combat extends javax.swing.JFrame {
     private void smallHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getSmallConsumable())){
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.MILLISECONDS.sleep(20);
             } catch (InterruptedException ex) {
                 System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -598,7 +670,7 @@ public class Combat extends javax.swing.JFrame {
     private void medHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getMediumConsumable())){
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.MILLISECONDS.sleep(20);
             } catch (InterruptedException ex) {
                 System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -616,7 +688,7 @@ public class Combat extends javax.swing.JFrame {
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed
         if (player.useConsumable(player.getInventory().getBigConsumable())){
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.MILLISECONDS.sleep(20);
             } catch (InterruptedException ex) {
                 System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
@@ -627,7 +699,7 @@ public class Combat extends javax.swing.JFrame {
     private void weaponUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weaponUseActionPerformed
         player.attack(currTarget);
         try {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.MILLISECONDS.sleep(20);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -637,7 +709,7 @@ public class Combat extends javax.swing.JFrame {
     private void skill1UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill1UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(0), currTarget);
         try {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.MILLISECONDS.sleep(20);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -647,7 +719,7 @@ public class Combat extends javax.swing.JFrame {
     private void skill2UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill2UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(1), currTarget);
         try {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.MILLISECONDS.sleep(20);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -657,7 +729,7 @@ public class Combat extends javax.swing.JFrame {
     private void skill3UseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skill3UseActionPerformed
         player.useSkill(player.getInventory().getCurrAbilities().get(2), currTarget);
         try {
-            TimeUnit.SECONDS.sleep(2);
+           TimeUnit.MILLISECONDS.sleep(20);
         } catch (InterruptedException ex) {
             System.getLogger(Combat.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -692,10 +764,13 @@ public class Combat extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel atkLvl;
     private javax.swing.JButton blockUse;
+    private javax.swing.JLabel debuffText;
     private javax.swing.JLabel dfLvl;
     private javax.swing.JLabel enAtkLvl;
+    private javax.swing.JLabel enDebuffTxt;
     private javax.swing.JLabel enDfLvl;
     private javax.swing.JLabel enHealthVal;
+    private javax.swing.JLabel enMoves;
     private javax.swing.JLabel enName;
     private javax.swing.JLabel enStrengthText;
     private javax.swing.JLabel enWeaknessText;
@@ -705,6 +780,7 @@ public class Combat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JButton largeHealUse;
     private javax.swing.JButton medHealUse;
     private javax.swing.JLabel playerHealthVal;

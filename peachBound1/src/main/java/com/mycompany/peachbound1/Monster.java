@@ -108,10 +108,10 @@ abstract class Monster {
         }
         
         if(getHealth() == 200){
-            setHealth(getHealth() + 50);
+            setHealth(getHealth() + 25);
         }
         else{
-            setHealth(getHealth() + 25);
+            setHealth(getHealth() + 10);
         }
         return true;
     }

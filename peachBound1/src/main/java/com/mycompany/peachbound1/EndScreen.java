@@ -17,6 +17,9 @@ public class EndScreen extends javax.swing.JFrame {
      */
     public EndScreen() {
         initComponents();
+    }
+    
+    public void EndMssg(){
         endingMssg.setText(endText);
     }
 
