@@ -681,6 +681,13 @@ public class Combat extends javax.swing.JFrame {
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
 
         player.block(currTarget);
+        if(currTarget.getHealth() <= 0){
+           EndScreen winWindow = new EndScreen();
+            winWindow.endText = "Congrats! You fought off all the enemies... You WIN";
+            winWindow.EndMssg();
+            winWindow.setVisible(true);
+            this.setVisible(false); 
+        }
         enemyMoveQueue.poll();
 
     }//GEN-LAST:event_blockUseActionPerformed
