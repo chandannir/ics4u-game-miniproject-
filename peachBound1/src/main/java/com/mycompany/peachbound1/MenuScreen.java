@@ -121,8 +121,39 @@ public class MenuScreen extends javax.swing.JFrame {
         
         
         PeachBound1.playerChar = new Player();
-        DoorSelect doorScreen = new DoorSelect();
-        doorScreen.setVisible(true);
+        
+        PeachBound1.currentFloor = 0;
+        
+        // Setup Monster Presets
+        PeachBound1.floor1 = new ArrayList<>();
+        PeachBound1.floor2 = new ArrayList<>();
+        PeachBound1.floor3 = new ArrayList<>();
+        PeachBound1.floor4 = new ArrayList<>();
+        PeachBound1.bossFloor = new ArrayList<>();
+        
+        PeachBound1.floor1.add(new RegularMonster("Big Guy"));
+        PeachBound1.floor1.add(new FireMonster("Draco"));
+        PeachBound1.floor1.add(new RegularMonster("Goomba"));
+        
+        PeachBound1.floor2.add(new FireMonster("Fire Flower"));
+        PeachBound1.floor2.add(new FireMonster("Draco"));
+        PeachBound1.floor2.add(new RegularMonster("Koopa"));
+        
+        PeachBound1.floor3.add(new FireMonster("Fire Koopa"));
+        PeachBound1.floor3.add(new RegularMonster("Goomba"));
+        PeachBound1.floor3.add(new IceMonster("Snowman"));
+        
+        PeachBound1.floor4.add(new LightningMonster("Magikoopa"));
+        PeachBound1.floor4.add(new FireMonster("Fire Flower"));
+        PeachBound1.floor3.add(new IceMonster("Frosty"));
+        
+        PeachBound1.bossFloor.add(new Brute("Bowser"));
+        
+        PeachBound1.monstPreset = PeachBound1.floor1;
+        
+        // Start the game
+        StoryNodeInitial storyScreen = new StoryNodeInitial();
+        storyScreen.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_playBtnActionPerformed
 
