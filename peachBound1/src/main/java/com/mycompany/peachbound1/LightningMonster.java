@@ -6,8 +6,8 @@ public class LightningMonster extends Monster{
     private final double paraChance;
     private final StatusEffect debuff; 
 
-    public LightningMonster(String name) {
-        super(name, 100.0, DMG_TYPES.MAGIC, 30, 50, 1, DMG_TYPES.MAGIC, DMG_TYPES.SLASH, 1);
+    public LightningMonster(String name, int offense, int defence) {
+        super(name, 100.0, DMG_TYPES.MAGIC, 30, 50, defence, DMG_TYPES.MAGIC, DMG_TYPES.SLASH, offense);
         this.paraChance = 0.3;
         this.debuff = StatusEffect.PARALYZE;
     }

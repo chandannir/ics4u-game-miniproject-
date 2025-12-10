@@ -131,21 +131,21 @@ public class MenuScreen extends javax.swing.JFrame {
         PeachBound1.floor4 = new ArrayList<>();
         PeachBound1.bossFloor = new ArrayList<>();
         
-        PeachBound1.floor1.add(new RegularMonster("Big Guy"));
-        PeachBound1.floor1.add(new FireMonster("Draco"));
-        PeachBound1.floor1.add(new RegularMonster("Goomba"));
+        PeachBound1.floor1.add(new RegularMonster("Big Guy", 1, 1));
+        PeachBound1.floor1.add(new FireMonster("Draco", 2, 2));
+        PeachBound1.floor1.add(new RegularMonster("Goomba", 2, 1));
         
-        PeachBound1.floor2.add(new FireMonster("Fire Flower"));
-        PeachBound1.floor2.add(new FireMonster("Draco"));
-        PeachBound1.floor2.add(new RegularMonster("Koopa"));
+        PeachBound1.floor2.add(new FireMonster("Fire Flower", 3, 3));
+        PeachBound1.floor2.add(new FireMonster("Draco", 3, 3));
+        PeachBound1.floor2.add(new RegularMonster("Koopa", 3, 2));
         
-        PeachBound1.floor3.add(new FireMonster("Fire Koopa"));
-        PeachBound1.floor3.add(new RegularMonster("Goomba"));
-        PeachBound1.floor3.add(new IceMonster("Snowman"));
+        PeachBound1.floor3.add(new FireMonster("Fire Koopa", 4, 4));
+        PeachBound1.floor3.add(new RegularMonster("Goomba", 4 , 3));
+        PeachBound1.floor3.add(new IceMonster("Snowman", 5, 4));
         
-        PeachBound1.floor4.add(new LightningMonster("Magikoopa"));
-        PeachBound1.floor4.add(new FireMonster("Fire Flower"));
-        PeachBound1.floor3.add(new IceMonster("Frosty"));
+        PeachBound1.floor4.add(new LightningMonster("Magikoopa", 6, 6));
+        PeachBound1.floor4.add(new FireMonster("Fire Flower", 5, 5));
+        PeachBound1.floor3.add(new IceMonster("Frosty", 6, 6));
         
         PeachBound1.bossFloor.add(new Brute("Bowser"));
         

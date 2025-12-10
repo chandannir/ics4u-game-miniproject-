@@ -9,8 +9,8 @@ public class IceMonster extends Monster{
 
     
 
-    public IceMonster(String name) {
-        super(name, 100.0, DMG_TYPES.MAGIC, 30, 50, 1, DMG_TYPES.BLUNT, DMG_TYPES.MAGIC, 1);
+    public IceMonster(String name, int offense, int defence) {
+        super(name, 125.0, DMG_TYPES.MAGIC, 30, 50, defence, DMG_TYPES.BLUNT, DMG_TYPES.MAGIC, offense);
         this.debuff = StatusEffect.FREEZE;
         this.freezeChance = 0.3;
         // String name, double health, DMG_TYPES dmg_type, double dmg, int stamina, int defence, DMG_TYPES weakness, DMG_TYPES strength, int offense

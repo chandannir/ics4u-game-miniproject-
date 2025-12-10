@@ -547,23 +547,31 @@ public class Combat extends javax.swing.JFrame {
                 switch(PeachBound1.currentFloor){
                     case 0:
                         PeachBound1.currentFloor++;
+                        PeachBound1.playerChar.setOffense_lvl(PeachBound1.playerChar.getOffense_lvl() + 1);
+                        PeachBound1.playerChar.setDefense_lvl(PeachBound1.playerChar.getDefense_lvl() + 1);
                         StoryNode1 story = new StoryNode1();
                         story.setVisible(true);
                         this.setVisible(false);
                         break;
                     case 1:
                         PeachBound1.currentFloor++;
+                        PeachBound1.playerChar.setOffense_lvl(PeachBound1.playerChar.getOffense_lvl() + 2);
+                        PeachBound1.playerChar.setDefense_lvl(PeachBound1.playerChar.getDefense_lvl() + 2);
                         StoryNode2 story2 = new StoryNode2();
                         story2.setVisible(true);
                         this.setVisible(false);
                         break;
                     case 2:
                         PeachBound1.currentFloor++;
+                        PeachBound1.playerChar.setOffense_lvl(PeachBound1.playerChar.getOffense_lvl() + 2);
+                        PeachBound1.playerChar.setDefense_lvl(PeachBound1.playerChar.getDefense_lvl() + 2);
                         StoryNode3 story3 = new StoryNode3();
                         story3.setVisible(true);
                         this.setVisible(false);
                         break;
                     default:
+                        PeachBound1.playerChar.setOffense_lvl(PeachBound1.playerChar.getOffense_lvl() + 3);
+                        PeachBound1.playerChar.setDefense_lvl(PeachBound1.playerChar.getDefense_lvl() + 3);
                         PeachBound1.currentFloor++;
                         StoryNodeBoss story4 = new StoryNodeBoss();
                         story4.setVisible(true);
@@ -677,6 +685,13 @@ public class Combat extends javax.swing.JFrame {
                     break;
             }
             
+            if(currTarget.debuffs.contains(StatusEffect.BLEED)){
+                currTarget.setHealth(currTarget.getHealth() - 12);
+            }
+            
+            if(currTarget.debuffs.contains(StatusEffect.BURN)){
+                currTarget.setHealth(currTarget.getHealth() - 15);
+            }
             
             UpdateUI();
         }
@@ -707,7 +722,9 @@ public class Combat extends javax.swing.JFrame {
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
-        enemyMoveQueue.remove();
+        if(!enemyMoveQueue.isEmpty()){
+            enemyMoveQueue.remove();
+        }
         if(enemyMoveQueue.size() < 1){
             generateEnemyMoves();
         }

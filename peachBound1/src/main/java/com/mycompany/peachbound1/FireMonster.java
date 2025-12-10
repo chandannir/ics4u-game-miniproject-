@@ -8,8 +8,8 @@ public class FireMonster extends Monster{
     private final int burnDmg; 
     private final StatusEffect debuff; 
 
-    public FireMonster(String name) {
-        super(name, 100.0, DMG_TYPES.MAGIC, 30, 50, 1, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, 1);
+    public FireMonster(String name, int offense, int defence) {
+        super(name, 150.0, DMG_TYPES.MAGIC, 30, 50, defence, DMG_TYPES.PIERCE, DMG_TYPES.MAGIC, offense);
         this.debuff = StatusEffect.BURN;
         this.burnChance = 0.3;
         this.burnDmg = 10; 
