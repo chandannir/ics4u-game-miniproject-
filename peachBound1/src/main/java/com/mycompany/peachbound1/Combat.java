@@ -39,16 +39,25 @@ public class Combat extends javax.swing.JFrame {
         targets = new ArrayList<>();
         currTargetNum = 0;
         
-        // Add all the enemies
-        Monster enemy1 = new RegularMonster("Big Guy");
-        Monster enemy2 = new FireMonster("Draco");
-        Monster enemy3 = new IceMonster("Mr Freeze");
-        targets.add(enemy1);
-        targets.add(enemy2);
-        targets.add(enemy3);
+        switch(PeachBound1.currentFloor){
+            case 0:
+                targets = PeachBound1.floor1;
+                break;
+            case 1:
+                targets = PeachBound1.floor2;
+                break;
+            case 2:
+                targets = PeachBound1.floor3;
+                break;
+            case 3:
+                targets = PeachBound1.floor4;
+                break;
+            default:
+                targets = PeachBound1.bossFloor;
+                break;
+        }
         
         currTarget = targets.get(currTargetNum);
-        
         
         enemyMoveQueue = new LinkedList<>();
         
@@ -526,28 +535,47 @@ public class Combat extends javax.swing.JFrame {
     }
    
     public void SwitchTarget(){
-        if(currTargetNum == targets.size()){
-            EndScreen winWindow = new EndScreen();
-            winWindow.endText = "Congrats! You fought off all the enemies... You WIN";
-            winWindow.EndMssg();
-            winWindow.setVisible(true);
-            this.setVisible(false);
+        if(currTargetNum == targets.size() - 1){
+            if(PeachBound1.currentFloor >= 4){
+                 EndScreen winWindow = new EndScreen();
+                 winWindow.endText = "Congrats! You fought off all the enemies... You WIN";
+                 winWindow.EndMssg();
+                 winWindow.setVisible(true);
+                 this.setVisible(false);
+            }
+            else{
+                switch(PeachBound1.currentFloor){
+                    case 0:
+                        PeachBound1.currentFloor++;
+                        StoryNode1 story = new StoryNode1();
+                        story.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    case 1:
+                        PeachBound1.currentFloor++;
+                        StoryNode2 story2 = new StoryNode2();
+                        story2.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    case 2:
+                        PeachBound1.currentFloor++;
+                        StoryNode3 story3 = new StoryNode3();
+                        story3.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    default:
+                        PeachBound1.currentFloor++;
+                        StoryNodeBoss story4 = new StoryNodeBoss();
+                        story4.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                }
+            }
         }
         else{
             currTargetNum++;
             currTarget = targets.get(currTargetNum);
         }
-    }
-    
-    private void CheckFreeze(){
-        // Check if player has freeze
-        // If it does proc an error window and remove freeze
-    }
-    
-    private void CheckPara(){
-        // Check if player has para
-        // If it does proc an error window and remove para
-        // Also make it so player takes 1.6x dmg if para (add it to the enemy move logic)
     }
 
     // Generates 5 moves for the enemy and stores them in a queue
@@ -617,7 +645,7 @@ public class Combat extends javax.swing.JFrame {
         }
         
         // execute the next move from the queue
-        EnemyMove move = enemyMoveQueue.poll();
+        EnemyMove move = enemyMoveQueue.remove();
         
         if (move != null) {
             switch (move) {
@@ -679,17 +707,14 @@ public class Combat extends javax.swing.JFrame {
     }//GEN-LAST:event_medHealUseActionPerformed
 
     private void blockUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockUseActionPerformed
-
+        enemyMoveQueue.remove();
+        if(enemyMoveQueue.size() < 1){
+            generateEnemyMoves();
+        }
         player.block(currTarget);
         if(currTarget.getHealth() <= 0){
-           EndScreen winWindow = new EndScreen();
-            winWindow.endText = "Congrats! You fought off all the enemies... You WIN";
-            winWindow.EndMssg();
-            winWindow.setVisible(true);
-            this.setVisible(false); 
+            SwitchTarget();
         }
-        enemyMoveQueue.poll();
-
     }//GEN-LAST:event_blockUseActionPerformed
 
     private void largeHealUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largeHealUseActionPerformed

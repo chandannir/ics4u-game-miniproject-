@@ -161,9 +161,32 @@ public class ItemGain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueBtnActionPerformed
-        ItemSelection combatPrep = new ItemSelection();
-        combatPrep.setVisible(true);
-        this.setVisible(false);
+                switch(PeachBound1.currentFloor){
+                    case 0:
+                        PeachBound1.currentFloor++;
+                        StoryNode1 story = new StoryNode1();
+                        story.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    case 1:
+                        PeachBound1.currentFloor++;
+                        StoryNode2 story2 = new StoryNode2();
+                        story2.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    case 2:
+                        PeachBound1.currentFloor++;
+                        StoryNode3 story3 = new StoryNode3();
+                        story3.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                    default:
+                        PeachBound1.currentFloor++;
+                        StoryNodeBoss story4 = new StoryNodeBoss();
+                        story4.setVisible(true);
+                        this.setVisible(false);
+                        break;
+                }
     }//GEN-LAST:event_continueBtnActionPerformed
 
     /**

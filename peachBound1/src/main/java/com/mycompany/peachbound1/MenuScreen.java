@@ -151,6 +151,8 @@ public class MenuScreen extends javax.swing.JFrame {
         
         PeachBound1.monstPreset = PeachBound1.floor1;
         
+        System.out.println(PeachBound1.playerChar.getInventory().getConsumables());
+        
         // Start the game
         StoryNodeInitial storyScreen = new StoryNodeInitial();
         storyScreen.setVisible(true);
