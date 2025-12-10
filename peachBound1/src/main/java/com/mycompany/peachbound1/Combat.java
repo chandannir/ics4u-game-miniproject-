@@ -656,6 +656,17 @@ public class Combat extends javax.swing.JFrame {
         EnemyMove move = enemyMoveQueue.remove();
         
         if (move != null) {
+             if(currTarget.debuffs.contains(StatusEffect.BLEED) && 
+              !(currTarget.debuffs.contains(StatusEffect.FREEZE) || currTarget.debuffs.contains(StatusEffect.PARALYZE))){
+                currTarget.setHealth(currTarget.getHealth() - 12);
+            }
+            
+            if(currTarget.debuffs.contains(StatusEffect.BURN)&& 
+              !(currTarget.debuffs.contains(StatusEffect.FREEZE) || currTarget.debuffs.contains(StatusEffect.PARALYZE))){
+                currTarget.setHealth(currTarget.getHealth() - 15);
+            }
+            
+            
             switch (move) {
                 case BLOCK:
                     // check if player's offense > monster's defense
@@ -684,15 +695,7 @@ public class Combat extends javax.swing.JFrame {
                     }
                     break;
             }
-            
-            if(currTarget.debuffs.contains(StatusEffect.BLEED)){
-                currTarget.setHealth(currTarget.getHealth() - 12);
-            }
-            
-            if(currTarget.debuffs.contains(StatusEffect.BURN)){
-                currTarget.setHealth(currTarget.getHealth() - 15);
-            }
-            
+           
             UpdateUI();
         }
         // Only execute one move per call - no recursion
