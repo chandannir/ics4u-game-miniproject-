@@ -17,16 +17,15 @@ public class RegularMonster extends Monster{
     @Override
     public double attack(double dmg, DMG_TYPES dmg_type,DMG_TYPES str, Player p){
         if(debuffs.contains(StatusEffect.FREEZE)){
+            debuffs.remove(StatusEffect.FREEZE);
             return p.getHealth();
         }
         else if(debuffs.contains(StatusEffect.PARALYZE)){
+            debuffs.remove(StatusEffect.PARALYZE);
             return p.getHealth();
         }
         if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
            dmg = dmg + dmg*0.6;
-        }
-        if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
-            dmg = dmg + dmg*0.6;
         }
         if(str == p.getWeakness()){
             dmg = dmg + dmg*0.2;

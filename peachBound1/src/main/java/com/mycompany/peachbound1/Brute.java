@@ -36,9 +36,11 @@ public class Brute extends Monster{
     @Override
     double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p) {
         if(debuffs.contains(StatusEffect.FREEZE)){
+            debuffs.remove(StatusEffect.FREEZE);
             return p.getHealth();
         }
         else if(debuffs.contains(StatusEffect.PARALYZE)){
+            debuffs.remove(StatusEffect.PARALYZE);
             return p.getHealth();
         }
         
@@ -62,9 +64,13 @@ public class Brute extends Monster{
        
         if(stamina >=25){
             if(debuffs.contains(StatusEffect.FREEZE)){
+                setStamina(stamina+10);
+                debuffs.remove(StatusEffect.FREEZE);
                 return p.getHealth();
             }
             else if(debuffs.contains(StatusEffect.PARALYZE)){
+                setStamina(stamina+10);
+                debuffs.remove(StatusEffect.PARALYZE);
                 return p.getHealth();
             }
             if(p.getDebuffs().contains(StatusEffect.PARALYZE)){

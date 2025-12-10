@@ -20,9 +20,11 @@ public class LightningMonster extends Monster{
     @Override
     double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p) {
         if(debuffs.contains(StatusEffect.FREEZE)){
+            debuffs.remove(StatusEffect.FREEZE);
             return p.getHealth();
         }
         else if(debuffs.contains(StatusEffect.PARALYZE)){
+            debuffs.remove(StatusEffect.PARALYZE);
             return p.getHealth();
         }
         if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
@@ -43,10 +45,12 @@ public class LightningMonster extends Monster{
     @Override
     double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p) {
         if(stamina >=25){
-            if(debuffs.contains(StatusEffect.FREEZE)){
+            if(debuffs.contains(StatusEffect.FREEZE)){ 
+                debuffs.remove(StatusEffect.FREEZE);
                 return p.getHealth();
             }
             else if(debuffs.contains(StatusEffect.PARALYZE)){
+                debuffs.remove(StatusEffect.PARALYZE);
                 return p.getHealth();
             }
             if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
