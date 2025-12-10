@@ -35,6 +35,13 @@ public class Brute extends Monster{
 
     @Override
     double attack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, Player p) {
+        if(debuffs.contains(StatusEffect.FREEZE)){
+            return p.getHealth();
+        }
+        else if(debuffs.contains(StatusEffect.PARALYZE)){
+            return p.getHealth();
+        }
+        
         if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
             dmg = dmg + dmg*0.6;
         }
@@ -54,6 +61,12 @@ public class Brute extends Monster{
     double specialAttack(double dmg, DMG_TYPES dmg_type, DMG_TYPES str, int stamina, Player p) {
        
         if(stamina >=25){
+            if(debuffs.contains(StatusEffect.FREEZE)){
+                return p.getHealth();
+            }
+            else if(debuffs.contains(StatusEffect.PARALYZE)){
+                return p.getHealth();
+            }
             if(p.getDebuffs().contains(StatusEffect.PARALYZE)){
                 dmg = dmg + dmg*0.6;
             }
